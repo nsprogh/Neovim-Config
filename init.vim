@@ -1,4 +1,4 @@
-" Follow XDG directory specs
+""" Follow XDG directory specs
 if empty($XDG_CACHE_HOME)
   let $XDG_CACHE_HOME = $HOME.'/.cache'
 endif
@@ -10,54 +10,77 @@ endif
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" Airline Config
-let g:ctrlp_working_path_mode = 'ra'
+" Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme='base16'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-" Ctrl-P Config
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_dont_split = 'NERD'
+" Ctrl-P
+"let g:ctrlp_working_path_mode = 'ra'
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+"let g:ctrlp_dont_split = 'NERD'
+
+" Better Whitespace
 let g:strip_whitespace_on_save = 0
 
-" ALE Config
+" ALE
 let g:ale_linters = {
 \   'rust': ['analyzer'],
 \   'php': ['langserver'],
 \   'typescript': ['tsserver', 'eslint'],
+\   'latex': ['texlab'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_set_balloons = 1
 
-" Unknown Config
+" Lens
+let g:lens#animate = 0
+let g:lens#disabled_filetypes = ['fzf']
+
+" Unknown
 let mapleader = ","
 
 """ Plugins """
-call plug#begin()
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'altercation/vim-colors-solarized'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'leafgarland/typescript-vim'
-Plug 'rust-lang/rust.vim'
-Plug 'rstacruz/vim-closer'
-Plug 'mbbill/undotree'
-Plug 'dense-analysis/ale'
-Plug 'mhinz/vim-grepper'
-Plug 'preservim/tagbar'
-call plug#end()
+" minpac doesn't actually have to be initialized all the time. It is only
+" needed when interacting with it (e.g. for updating/installing plugins)
+function! PackInit() abort
+    packadd minpac
+
+    call minpac#init()
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+    call minpac#add('tpope/vim-fugitive')
+    call minpac#add('tpope/vim-surround')
+    call minpac#add('tpope/vim-endwise')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    "call minpac#add('ctrlpvim/ctrlp.vim')
+    call minpac#add('scrooloose/nerdcommenter')
+    call minpac#add('altercation/vim-colors-solarized')
+    call minpac#add('ntpeters/vim-better-whitespace')
+    call minpac#add('leafgarland/typescript-vim')
+    call minpac#add('rust-lang/rust.vim')
+    call minpac#add('rstacruz/vim-closer')
+    call minpac#add('mbbill/undotree')
+    call minpac#add('dense-analysis/ale')
+    call minpac#add('preservim/tagbar')
+    call minpac#add('camspiers/lens.vim')
+    call minpac#add('junegunn/fzf', {'do': {-> fzf#install()}})
+    call minpac#add('junegunn/fzf.vim')
+endfunction
+
+" Define user commands for updating/cleaning the plugins. Each of them calls
+" PackInit() to load minpac and register the information of plugins, then
+" performs the task.
+command! PackUpdate call PackInit() | call minpac#update()
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()
 
 """ Autocmds """
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd BufRead,BufNewFile *.volt setfiletype html
+autocmd! FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd! BufRead,BufNewFile *.volt setfiletype html
 
 """ Editor Configs """
 set tabstop=4
@@ -115,8 +138,8 @@ nnoremap <silent>   gr          :ALEFindReferences<CR>
 map <silent>        <C-\>       <Plug>NERDCommenterToggle
 inoremap <expr>     <Tab>       pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr>     <S-Tab>     pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr>     <cr>        pumvisible() ? "\<C-y>" : "\<cr>"
-noremap             <C-S-f>     :Grepper -tool rg<CR>
+noremap             <C-f>       :Rg 
+noremap             <C-p>       :GFiles<CR>
 map                 <C-`>       <Esc>:vert term<CR>
 
 """ Terminal Keybinds """
