@@ -10,11 +10,34 @@ vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
 return require("packer").startup(function(use)
     use {"wbthomason/packer.nvim", opt = true}
 
+    -- Git client
     use "tpope/vim-fugitive"
+
+    -- Surround text with brackets/parens/quotes/etc.
     use "tpope/vim-surround"
-    use "tpope/vim-endwise"
+
+    -- Auto close blocks. Endwise is for languges with text based block
+    -- delimiters like Bash (if/fi) and Ruby (if/endif). Closer is for standard
+    -- braces and other symbol-based block delimiters.
+    --use "tpope/vim-endwise"
     use "rstacruz/vim-closer"
-    -- For status line and tabline
+    -- This works but is ever so slightly perceptible slow compared to
+    -- vim-closer. I'll try this out later.
+    --use {
+    --    "windwp/nvim-autopairs",
+    --    config = function ()
+    --        require("nvim-autopairs").setup {
+    --            check_ts = true
+    --        }
+
+    --        require("nvim-autopairs.completion.compe").setup {
+    --            map_cr = true,
+    --            map_complete = false
+    --        }
+    --    end
+    --}
+
+    -- Status line and tab line
     --use "vim-airline/vim-airline"
     --use "vim-airline/vim-airline-themes"
     use {
@@ -27,7 +50,7 @@ return require("packer").startup(function(use)
                     -- Auto works nice and all but the dedicated solarized theme
                     -- works a bit better I think. I'll try it out and see. Try
                     -- switching to "solarized_dark" in a bit.
-                    theme = "auto",
+                    theme = "solarized_dark",
                     section_separators = "",
                     component_separators = "|",
                     icons_enabled = false
@@ -42,6 +65,7 @@ return require("packer").startup(function(use)
         config = function ()
             require("bufferline").setup{
                 options = {
+                    view = "multiwindow",
                     numbers = "none",
                     show_buffer_close_icons = false,
                     show_close_icon = false,
@@ -60,18 +84,46 @@ return require("packer").startup(function(use)
 
     -- Autocommenter
     --use "scrooloose/nerdcommenter"
-    use "tomtom/tcomment_vim"
+    --use "tomtom/tcomment_vim"
+    use "tpope/vim-commentary"
+    -- This integrates with commentary and updates commentstring as
+    -- needed when in polyglot filetypes (e.g. TSX or HTML files)
+    use "JoosepAlviste/nvim-ts-context-commentstring"
 
     -- Solarized Color Scheme
     --use "altercation/vim-colors-solarized"
     --use "lifepillar/vim-solarized8"
     use "romainl/flattened"
 
+    -- Trailing whitespace nagger
     use "ntpeters/vim-better-whitespace"
-    use {"leafgarland/typescript-vim", opt = true, ft = {"typescript"}}
-    use {"rust-lang/rust.vim", opt = true, ft = {"rust"}}
+
+    -- Language specific plugins
+    -- Perhaps these are not needed anymore with TreeSitter?
+    --use {"leafgarland/typescript-vim", opt = true, ft = {"typescript"}}
+    --use {"rust-lang/rust.vim", opt = true, ft = {"rust"}}
+
+    -- Undo tree side-panel
     use {"mbbill/undotree", opt = true, cmd = {"UndotreeToggle"}}
+
+    -- Tags side-panel
     use {"preservim/tagbar", opt = true, cmd = {"TagbarToggle"}}
+
+    -- Indent guides
+    -- use "lukas-reineke/indent-blankline.nvim"
+
+    -- Treesitter
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        config = function ()
+            require("nvim-treesitter.configs").setup {
+                highlight = {enable = true},
+                indent = {enable = true},
+                autopairs = {enable = true},
+                context_commentstring = {enable = true}
+            }
+        end
+    }
 
     -- LSP and autocompletion
     --use "dense-analysis/ale"

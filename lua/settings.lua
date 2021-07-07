@@ -11,9 +11,11 @@ cmd("colorscheme flattened_dark")
 -- Editor Options
 go.tabstop = 4
 go.softtabstop = 0
-go.shiftwidth = 0
+go.shiftwidth = 4
 go.expandtab = true
 go.smarttab = true
+go.smartindent = true
+go.ignorecase = true
 go.backspace = "2"
 go.encoding = "UTF-8"
 go.updatetime = 1000
