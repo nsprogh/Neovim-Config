@@ -54,7 +54,8 @@ return require("packer").startup(function(use)
                     section_separators = "",
                     component_separators = "|",
                     icons_enabled = false
-                }
+                },
+                extensions = {'nvim-tree', 'fugitive'}
             }
         end
     }
@@ -75,12 +76,68 @@ return require("packer").startup(function(use)
         end
     }
 
+    -- File browser
+    use {
+        "kyazdani42/nvim-tree.lua",
+        -- Uncomment to use icons on status line
+        --requires = {"kyazdani42/nvim-web-devicons"},
+        config = function ()
+            require("nvim-tree").setup{
+                view = {
+                    width = 40
+                }
+            }
+        end
+    }
+
     -- Fuzzy finder
-    use "ctrlpvim/ctrlp.vim"
-    --use {
-        --"nvim-telescope/telescope.nvim",
-        --requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
-    --}
+    -- use "ctrlpvim/ctrlp.vim"
+    use {
+        "nvim-telescope/telescope.nvim",
+        -- Has a weird bug right now with lazy loading
+        --opt = true,
+        --cmd = {"Telescope"},
+        requires = {{"nvim-lua/plenary.nvim"}},
+        config = function ()
+            local actions = require("telescope.actions")
+            require("telescope").setup{
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<esc>"] = actions.close
+                        }
+                    }
+                },
+                pickers = {
+                    find_files = {
+                        previewer = false,
+                        theme = "ivy"
+                    },
+                    git_files = {
+                        previewer = false,
+                        theme = "ivy"
+                    },
+                    live_grep = {
+                        theme = "dropdown"
+                    },
+                    man_pages = {
+                        previewer = false,
+                        theme = "ivy"
+                    },
+                    lsp_references = {
+                        previewer = false,
+                        theme = "ivy",
+                        initial_mode = "normal"
+                    },
+                    lsp_code_actions = {
+                        previewer = false,
+                        theme = "cursor",
+                        initial_mode = "normal"
+                    }
+                }
+            }
+        end
+    }
 
     -- Autocommenter
     --use "scrooloose/nerdcommenter"
@@ -110,7 +167,7 @@ return require("packer").startup(function(use)
     use {"preservim/tagbar", opt = true, cmd = {"TagbarToggle"}}
 
     -- Indent guides
-    -- use "lukas-reineke/indent-blankline.nvim"
+    --use "lukas-reineke/indent-blankline.nvim"
 
     -- Treesitter
     use {
@@ -118,8 +175,8 @@ return require("packer").startup(function(use)
         config = function ()
             require("nvim-treesitter.configs").setup {
                 highlight = {enable = true},
-                indent = {enable = true},
-                autopairs = {enable = true},
+                indent = {enable = false},
+                autopairs = {enable = false},
                 context_commentstring = {enable = true}
             }
         end
@@ -155,4 +212,9 @@ return require("packer").startup(function(use)
             }
         end
     }
+    -- use {
+    --   'weilbith/nvim-code-action-menu',
+    --   opt = true,
+    --   cmd = 'CodeActionMenu'
+    -- }
 end)
