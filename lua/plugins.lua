@@ -85,6 +85,9 @@ return require("packer").startup(function(use)
             require("nvim-tree").setup{
                 view = {
                     width = 40
+                },
+                git = {
+                    ignore = 1
                 }
             }
         end
@@ -192,6 +195,9 @@ return require("packer").startup(function(use)
             require("lspconfig").tsserver.setup{}
             require("lspconfig").texlab.setup{}
             require("lspconfig").ccls.setup{}
+            require("lspconfig").psalm.setup{
+                cmd = { "psalm-language-server", "--enable-autocomplete=false" }
+            }
         end
     }
     use {

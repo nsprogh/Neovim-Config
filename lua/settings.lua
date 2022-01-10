@@ -68,7 +68,6 @@ g.ale_completion_autoimport = 1
 g.ale_set_balloons = 1
 
 -- Nvim Tree
-g.nvim_tree_gitignore = 1
 -- g.nvim_tree_width = 40
 g.nvim_tree_show_icons = {
     git = 0,

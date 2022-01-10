@@ -1,4 +1,2 @@
-/*
-!/init.lua
-!/lua
-!/.gitignore
+/plugin
+/.netrwhist
