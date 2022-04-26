@@ -1,7 +1,22 @@
-local cmd = vim.cmd
-
-cmd("autocmd! FileType yaml setlocal ts=2 sts=2 sw=2 expandtab")
-cmd("autocmd! BufRead,BufNewFile *.volt setfiletype html")
---cmd("autocmd vimenter * ++nested colorscheme solarized8")
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'yaml',
+    callback = function ()
+        vim.bo.tabstop = 2
+        vim.bo.softtabstop = 2
+        vim.bo.shiftwidth = 2
+        vim.bo.expandtab = true
+    end
+})
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    pattern = '*.volt',
+    callback = function ()
+        vim.bo.filetype = 'html'
+    end
+})
 -- A little too aggressive, almost perfect
---cmd("autocmd WinNew * wincmd H")
+--vim.api.nvim_create_autocmd('WinNew', {
+--    pattern = '*',
+--    callback = function ()
+--        vim.api.nvim_command('wincmd H')
+--    end
+--})

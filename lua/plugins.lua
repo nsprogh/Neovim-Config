@@ -3,7 +3,15 @@ vim.cmd [[ packadd packer.nvim ]]
 
 -- Automatically run :PackerCompile whenever plugins.lua is updated with an
 -- autocommand
-vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
+-- vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
+
+-- Doesn't seem to do anything?
+--vim.api.nvim_create_autocmd('BufWritePost', {
+--    pattern = 'plugins.lua',
+--    callback = function ()
+--        require'packer'.compile()
+--    end
+--})
 
 -- TODO this doesn't need to be loaded every time, figure out how to hook into
 -- install and update commands
