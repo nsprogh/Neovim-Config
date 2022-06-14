@@ -1,10 +1,10 @@
 -- Only required if you have packer in your `opt` pack
 vim.cmd [[ packadd packer.nvim ]]
 
-local function endswith(source, pattern)
-    local start = -1 * source:len()
+function string:endswith(pattern)
+    local start = -1 * pattern:len()
 
-    return source:sub(start) == pattern
+    return self:sub(start) == pattern
 end
 
 -- Automatically run :PackerCompile whenever plugins.lua is updated with an
@@ -22,24 +22,20 @@ end
 require'packer'.startup(function (use)
     use {'wbthomason/packer.nvim', {opt = true}}
 
-    -- Git client
-    use 'tpope/vim-fugitive'
-
-    -- Surround text with brackets/parens/quotes/etc.
-    use 'tpope/vim-surround'
-
     -- Load all plugin modules
     local pluginfiles = vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true)
-    for filepath in pluginfiles do
+    for _, filepath in ipairs(pluginfiles) do
         -- Except init.lua (this file) or disabled modules (! suffix)
-        if endswith(filepath, '/init.lua') or endswith(filepath, '!') then
+        if filepath:endswith('/init.lua') or filepath:endswith('!') then
             goto continue
         end
 
-        print(vim.inspect(filepath))
-
-        local module = require(filepath)
-        use(module)
+        local module = dofile(filepath)
+        if type(module) == 'function' then
+            module(use)
+        else
+            use(module)
+        end
 
         ::continue::
     end
