@@ -1,6 +1,7 @@
 -- LSP and autocompletion
 return {
     'neovim/nvim-lspconfig',
+    as = 'lsp',
     config = function ()
         require'lspconfig'.rust_analyzer.setup {}
         require'lspconfig'.intelephense.setup {}

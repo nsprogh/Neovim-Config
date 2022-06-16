@@ -23,7 +23,6 @@ vim.o.mouse = 'a'
 vim.o.undofile = true
 vim.o.background = 'dark'
 vim.o.termguicolors = true
-vim.o.completeopt = 'menuone,noselect'
 
 -- Window-Local Options
 vim.wo.number = true
