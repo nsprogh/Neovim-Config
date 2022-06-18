@@ -1,9 +1,7 @@
 return function (use)
     use {
         'nvim-telescope/telescope.nvim',
-        -- Has a weird bug right now with lazy loading
-        -- opt = true,
-        -- cmd = {'Telescope'},
+        module = 'telescope',
         requires = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-ui-select.nvim'

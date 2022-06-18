@@ -18,14 +18,12 @@ return function (use)
     -- Undo tree side-panel
     use {
         'mbbill/undotree',
-        opt = true,
         cmd = {'UndotreeToggle', 'UndotreeOpen'}
     }
 
     -- Tags side-panel
     use {
         'preservim/tagbar',
-        opt = true,
         cmd = {'TagbarToggle', 'TagbarOpen'}
     }
 
