@@ -27,6 +27,10 @@ function command.search_man_pages ()
     }
 end
 
+function command.search_help ()
+    require'telescope.builtin'.help_tags()
+end
+
 function command.lsp_references ()
     require'telescope.builtin'.lsp_references {
         initial_mode = 'normal',
