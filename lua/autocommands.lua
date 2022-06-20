@@ -13,6 +13,13 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
         vim.bo.filetype = 'html'
     end
 })
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'json',
+    callback = function ()
+        vim.o.foldmethod = 'expr'
+        vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+    end
+})
 -- A little too aggressive, almost perfect
 --vim.api.nvim_create_autocmd('WinNew', {
 --    pattern = '*',
