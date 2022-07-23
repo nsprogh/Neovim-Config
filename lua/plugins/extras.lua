@@ -13,7 +13,9 @@ return function (use)
     --use 'ctrlpvim/ctrlp.vim'
 
     -- Trailing whitespace nagger
-    use 'ntpeters/vim-better-whitespace'
+    -- Currently broken as of 2022-06-29
+    --
+    -- use 'ntpeters/vim-better-whitespace'
 
     -- Undo tree side-panel
     use {

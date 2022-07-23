@@ -19,6 +19,12 @@ end
 --    end
 --})
 
+-- TODO Plugins to try out
+-- - Hydra https://github.com/anuvyklack/hydra.nvim
+-- - GitSigns https://github.com/lewis6991/gitsigns.nvim
+-- - Telescope Project https://github.com/nvim-telescope/telescope-project.nvim
+-- - UFO (better code folding) https://github.com/kevinhwang91/nvim-ufo
+
 require'packer'.startup(function (use)
     use {'wbthomason/packer.nvim', {opt = true}}
 

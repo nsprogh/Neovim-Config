@@ -42,13 +42,10 @@ return function (use)
                     }
                 }
             }
+            -- EXTENSIONS --
+            -- Extensions not explicitly loaded here, will be lazy-loaded
 
             require'telescope'.load_extension('ui-select')
         end
     }
-
-    -- EXTENSIONS --
-
-    -- use {'nvim-telescope/telescope-ui-select.nvim'}
-    -- require'telescope'.load_extension('ui-select')
 end
