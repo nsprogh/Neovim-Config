@@ -4,7 +4,9 @@ return function (use)
         module = 'telescope',
         requires = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-ui-select.nvim'
+            'nvim-telescope/telescope-ui-select.nvim',
+            'nvim-telescope/telescope-file-browser.nvim',
+            'nvim-telescope/telescope-project.nvim'
         },
         config = function ()
             local actions = require'telescope.actions'

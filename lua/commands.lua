@@ -20,6 +20,10 @@ function command.project_grep ()
     require'telescope.builtin'.live_grep()
 end
 
+function command.project_open ()
+    require'telescope'.extensions.project.project()
+end
+
 function command.search_man_pages ()
     require'telescope.builtin'.man_pages {
         -- TODO Check if command count is present and pass that in instead

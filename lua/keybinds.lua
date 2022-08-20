@@ -31,12 +31,15 @@ vim.keymap.set('n', 'gs', '<cmd>Git<cr>')
 vim.keymap.set('n', 'gb', '<cmd>BufferLinePick<cr>')
 -- IDK Man...
 vim.keymap.set({'n', 'i'}, '<C-`>', '<esc><cmd>vert term<cr>')
+
+---- Find Stuff ----
 vim.keymap.set('n', 'ff', command.project_files)
 vim.keymap.set('n', 'fg', command.project_grep)
 -- Old implementation
 --U.map("n", "fm", "<Cmd>:Telescope man_pages sections=[v:count?string(v:count):'ALL']<cr>")
 vim.keymap.set('n', 'fm', command.search_man_pages)
 vim.keymap.set('n', 'fh', command.search_help)
+vim.keymap.set('n', 'fp', command.project_open)
 
 ---- Convenience ----
 -- Swap between current and previous buffer
