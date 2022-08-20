@@ -2,7 +2,7 @@
 --return 'altercation/vim-colors-solarized'
 --return 'lifepillar/vim-solarized8'
 -- Lightweight version
---return 'romainl/flattened'
+-- return { 'romainl/flattened', as = 'colorscheme' }
 
 -- Nord Color Scheme
 -- Lots of features supported by this one
