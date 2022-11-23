@@ -9,6 +9,7 @@ return {
         'typescriptreact', 'javascriptreact'
     },
     config = function ()
+        require'lspconfig'.eslint.setup {}
         require'lspconfig'.rust_analyzer.setup {}
         require'lspconfig'.intelephense.setup {}
         require'lspconfig'.tsserver.setup {}

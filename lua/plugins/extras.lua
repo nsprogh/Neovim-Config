@@ -38,4 +38,16 @@ return function (use)
             }
         end
     }
+
+    -- Toggleable Terminal
+    use {
+        'akinsho/toggleterm.nvim',
+        config = function ()
+            require'toggleterm'.setup {
+                size = 72,
+                open_mapping = [[<A-\>]],
+                direction = 'vertical'
+            }
+        end
+    }
 end
