@@ -1,6 +1,3 @@
--- Only required if you have packer in your `opt` pack
-vim.cmd [[ packadd packer.nvim ]]
-
 function string:endswith(pattern)
     local start = -1 * pattern:len()
 
@@ -27,7 +24,7 @@ end
 -- - UFO (better code folding) https://github.com/kevinhwang91/nvim-ufo
 
 require'packer'.startup(function (use)
-    use {'wbthomason/packer.nvim', {opt = true}}
+    use 'wbthomason/packer.nvim'
 
     -- Load all plugin modules
     local pluginfiles = vim.api.nvim_get_runtime_file('lua/plugins/*.lua', true)

@@ -1,5 +1,4 @@
 -- Global options
-vim.g.mapleader = ' '
 -- New Lua-based filetype detection, comment out to revert to old .vim ft code
 -- Some filetypes are not supported in the Lua version
 --vim.g.do_filetype_lua = 1

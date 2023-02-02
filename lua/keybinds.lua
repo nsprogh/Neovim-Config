@@ -1,51 +1,29 @@
 local command = require 'commands'
 
-vim.keymap.set('n', '<C-k><C-n>', '<cmd>NvimTreeToggle<cr>')
-vim.keymap.set('n', '<C-k><C-m>', '<cmd>NvimTreeFindFile<cr>')
-vim.keymap.set('n', '<C-k><C-u>', '<cmd>UndotreeToggle<cr>')
-vim.keymap.set('n', '<C-k><C-j>', '<cmd>TagbarToggle<cr>')
+vim.g.mapleader = ' ' -- spacebar for leader
+-- For leader keybinds see which-key plugin configuration
 
--- Doesn't work for some reason. Something to do with how vim handles the shift
--- key
---vim.keymap.set({'n', 'i'}, '<C-T><C-T>', '<cmd>tabnew<cr>')
+-- Goto
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition'})
+vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {desc = 'Goto Type Definition'})
+vim.keymap.set('n', 'gr', command.lsp_references, {desc = 'Goto References'})
+vim.keymap.set('n', 'gw', vim.diagnostic.goto_prev, {desc = 'Goto Previous Diagnostic'})
+vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, {desc = 'Goto Next Diagnostic'})
+vim.keymap.set('n', 'gb', command.goto_buffer, {desc = 'Goto Buffer'})
 
-vim.keymap.set({'n', 'i'}, '<C-t><C-t>', '<cmd>tabnext<cr>')
-vim.keymap.set({'n', 'i'}, '<C-t><C-r>', '<cmd>tabprevious<cr>')
--- Not needed anymore (probably)
--- ...Was it ever needed? Maybe the new behavior for bdelete is a NeoVim thing
---vim.keymap.set('n', '<C-c>', '<cmd>bp\\<bar>bd #<cr>')
--- LSP and completion
--- vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition)
-vim.keymap.set('n', 'gr', command.lsp_references)
-vim.keymap.set('n', 'gR', vim.lsp.buf.rename)
-vim.keymap.set('n', 'ge', vim.diagnostic.open_float)
-vim.keymap.set('n', 'gE', '<cmd>TroubleToggle document_diagnostics<cr>')
-vim.keymap.set('n', 'gw', vim.lsp.buf.code_action)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+-- View
+vim.keymap.set('n', ';', vim.lsp.buf.hover)
+
+-- LSP tweaks
 vim.keymap.set('i', '<Tab>', command.smart_tab, { expr = true })
 vim.keymap.set('i', '<S-Tab>', command.smart_tab_rev, { expr = true })
-vim.keymap.set('n', 'gs', '<cmd>Git<cr>')
-vim.keymap.set('n', 'gb', '<cmd>BufferLinePick<cr>')
--- IDK Man...
-vim.keymap.set({'n', 'i'}, '<C-`>', '<esc><cmd>vert term<cr>')
 
----- Find Stuff ----
-vim.keymap.set('n', 'ff', command.project_files)
-vim.keymap.set('n', 'fg', command.project_grep)
--- Old implementation
---U.map("n", "fm", "<Cmd>:Telescope man_pages sections=[v:count?string(v:count):'ALL']<cr>")
-vim.keymap.set('n', 'fm', command.search_man_pages)
-vim.keymap.set('n', 'fh', command.search_help)
-vim.keymap.set('n', 'fp', command.project_open)
+---- ToggleTerm ----
+vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
 
 ---- Convenience ----
 -- Swap between current and previous buffer
 vim.keymap.set('n', '<BS>', '<C-^>')
--- Clear search highlights and error messages
-vim.keymap.set('n', ';', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>')
 -- Scroll using ',' and 'm'
 vim.keymap.set('n', ',', '<C-y>')
 vim.keymap.set('n', 'm', '<C-e>')
@@ -73,3 +51,5 @@ vim.keymap.set({'t', 'i', 'n'}, '<A-s>', '<cmd>split<cr>')
 vim.keymap.set({'i', 'n'}, '<A-w>', '<cmd>write<cr>')
 vim.keymap.set({'i', 'n'}, '<A-W>', '<cmd>write!<cr>')
 vim.keymap.set({'i', 'n'}, '<A-a>', '<cmd>terminal<cr>')
+vim.keymap.set({'i', 'n'}, '<A-t>', '<cmd>tabnew<cr>')
+vim.keymap.set({'i', 'n'}, '<A-T>', '<cmd>tabclose<cr>')

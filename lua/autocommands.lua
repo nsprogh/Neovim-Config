@@ -30,3 +30,12 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 --        vim.api.nvim_command('wincmd H')
 --    end
 --})
+
+-- If writing a file in a directory that doesn't exist yet, this will create
+-- the directory for you.
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = vim.api.nvim_create_augroup('auto_create_dir', { clear = true }),
+    callback = function (context)
+        vim.fn.mkdir(vim.fn.fnamemodify(context.file, ':p:h'), 'p')
+    end
+})

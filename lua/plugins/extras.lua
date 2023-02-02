@@ -39,15 +39,24 @@ return function (use)
         end
     }
 
-    -- Toggleable Terminal
+    -- <C-A>/<C-X> increment decrement
     use {
-        'akinsho/toggleterm.nvim',
+        'nat-418/boole.nvim',
         config = function ()
-            require'toggleterm'.setup {
-                size = 72,
-                open_mapping = [[<A-\>]],
-                direction = 'vertical'
+            require'boole'.setup {
+                mappings = {
+                    increment = '<C-a>',
+                    decrement = '<C-x>'
+                }
             }
+        end
+    }
+
+    use {
+        'lukas-reineke/headlines.nvim',
+        ft = {'markdown'},
+        config = function()
+            require('headlines').setup()
         end
     }
 end

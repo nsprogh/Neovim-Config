@@ -3,19 +3,21 @@
 -- braces and other symbol-based block delimiters.
 
 --return 'tpope/vim-endwise'
-return 'rstacruz/vim-closer'
+-- Seems to have some kind of issues/conflicts with nvim-cmp and the <cr> key
+--return 'rstacruz/vim-closer'
 -- This works but is ever so slightly perceptible slow compared to
--- vim-closer. I'll try this out later.
---return {
---    'windwp/nvim-autopairs',
---    config = function ()
---        require('nvim-autopairs').setup {
---            check_ts = true
---        }
+-- vim-closer.
+return {
+    'windwp/nvim-autopairs',
+    after = 'completion',
+    config = function ()
+        require('nvim-autopairs').setup {
+            -- behaves strangely
+            check_ts = false
+        }
 
---        require('nvim-autopairs.completion.compe').setup {
---            map_cr = true,
---            map_complete = false
---        }
---    end
---}
+        local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+        local cmp = require 'cmp'
+        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end
+}

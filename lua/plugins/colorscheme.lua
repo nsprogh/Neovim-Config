@@ -18,3 +18,19 @@ return {
         require'nord'.set()
     end
 }
+
+-- A little weird right now
+-- return {
+--     'Tsuzat/NeoSolarized.nvim',
+--     as = 'colorscheme',
+--     config = function ()
+--         require'NeoSolarized'.setup {
+--             style = 'dark',
+--             transparent = false,
+--             terminal_colors = true, -- ?
+--             enable_italics = true
+--         }
+
+--         vim.cmd[[colorscheme NeoSolarized]]
+--     end
+-- }

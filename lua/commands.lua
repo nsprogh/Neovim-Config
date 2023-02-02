@@ -16,6 +16,10 @@ function command.project_files ()
     end
 end
 
+function command.recent_files ()
+    require'telescope.builtin'.oldfiles()
+end
+
 function command.project_grep ()
     require'telescope.builtin'.live_grep()
 end
@@ -25,9 +29,16 @@ function command.project_open ()
 end
 
 function command.search_man_pages ()
+    local selected_sections
+    if vim.v.count > 0 then
+        local count_string = tostring(vim.v.count)
+        selected_sections = {count_string}
+    else
+        selected_sections = {'ALL'}
+    end
+
     require'telescope.builtin'.man_pages {
-        -- TODO Check if command count is present and pass that in instead
-        sections = {'ALL'}
+        sections = selected_sections
     }
 end
 
@@ -44,6 +55,21 @@ function command.lsp_references ()
         },
         trim_text = true
     }
+end
+
+function command.toggle_all_terminals ()
+    require'toggleterm'.toggle_all()
+end
+
+function command.goto_buffer ()
+    require'telescope.builtin'.buffers()
+end
+
+function command.quickfix ()
+    vim.lsp.buf.code_action({
+        only = {'quickfix'},
+        apply = true
+    })
 end
 
 return command

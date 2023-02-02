@@ -1,9 +1,8 @@
 return {
     "kyazdani42/nvim-tree.lua",
-    opt = true,
-    cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
+    cmd = {'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFindFile'},
     -- Uncomment to use icons on status line
-    --requires = {"kyazdani42/nvim-web-devicons"},
+    requires = {'kyazdani42/nvim-web-devicons'},
     config = function ()
         require("nvim-tree").setup{
             view = {
@@ -14,12 +13,12 @@ return {
             },
             renderer = {
                 icons = {
-                    show = {
-                        git = false,
-                        folder = false,
-                        file = false,
-                        folder_arrow = true
-                    }
+                    -- show = {
+                    --     git = false,
+                    --     folder = false,
+                    --     file = false,
+                    --     folder_arrow = true
+                    -- }
                 }
             }
         }

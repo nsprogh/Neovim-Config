@@ -1,0 +1,16 @@
+return {
+    'ray-x/lsp_signature.nvim',
+    as = 'signature-help',
+    after = 'completion',
+    config = function ()
+        require'lsp_signature'.setup {
+            hint_enable = false,
+            max_height = 10,
+            max_width = 80,
+            wrap = false,
+            handler_opts = {
+                border = 'none'
+            }
+        }
+    end
+}

@@ -11,7 +11,7 @@ return function (use)
                     -- add languages not supported by treesitter here
                     additional_vim_regex_highlighting = false
                 },
-                indent = {enable = true},
+                indent = {enable = false},
                 autopairs = {enable = false},
                 context_commentstring = {enable = true}
             }
@@ -21,6 +21,8 @@ return function (use)
             --vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
         end
     }
+
+    -- use {'nvim-treesitter/nvim-treesitter-angular', after = 'treesitter'}
 
     -- Treesitter equivalent to context.vim
     use {

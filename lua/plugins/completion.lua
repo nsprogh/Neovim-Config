@@ -62,8 +62,6 @@ return function (use)
             {'hrsh7th/cmp-buffer', after = 'completion'},
             {'hrsh7th/cmp-path', after = 'completion'},
             {'hrsh7th/cmp-cmdline', after = 'completion'},
-            {'hrsh7th/cmp-nvim-lsp-signature-help',
-                after = {'lsp', 'completion'}},
             {'saadparwaiz1/cmp_luasnip',
                 after = 'completion',
                 requires = 'l3mon4d3/luasnip'}
@@ -105,7 +103,6 @@ return function (use)
                 },
                 sources = {
                     {name = 'nvim_lsp', group_index = 1},
-                    {name = 'nvim_lsp_signature_help', group_index = 1},
                     {name = 'luasnip', group_index = 1},
                     -- Don't show buffer completion if the others are available
                     -- **Since we aren't loading nvim-cmp until lsp is loaded and

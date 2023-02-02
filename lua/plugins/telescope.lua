@@ -19,6 +19,10 @@ return function (use)
                     }
                 },
                 pickers = {
+                    buffers = {
+                        previewer = false,
+                        theme = 'dropdown'
+                    },
                     find_files = {
                         previewer = false,
                         theme = 'ivy'
@@ -27,20 +31,29 @@ return function (use)
                         previewer = false,
                         theme = 'ivy'
                     },
-                    live_grep = {
-                        theme = 'dropdown'
-                    },
                     man_pages = {
                         previewer = false,
                         theme = 'ivy'
                     },
                     lsp_references = {
                         initial_mode = 'normal'
+                    },
+                    help_tags = {
+                        mappings = {
+                            i = {
+                                ['<cr>'] = actions.file_vsplit
+                            }
+                        }
                     }
                 },
                 extensions = {
                     ['ui-select'] = {
                         require'telescope.themes'.get_cursor()
+                    },
+                    project = {
+                        base_dirs = {
+                            {'~/Documents/projects', max_depth = 2}
+                        }
                     }
                 }
             }
