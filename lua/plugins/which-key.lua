@@ -65,6 +65,8 @@ return {
                     name = 'Packer',
                     s = {'<cmd>PackerSync<cr>', 'Sync'},
                     c = {'<cmd>PackerCompile<cr>', 'Compile'},
+                    p = {'<cmd>PackerStatus<cr>', 'Status'},
+                    l = {':PackerLoad ', 'Load [Plugin]'}
                 }
             }
         }
