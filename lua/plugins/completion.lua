@@ -77,7 +77,8 @@ return function (use)
             local cmp = require 'cmp'
             cmp.setup {
                 performance = {
-                    throttle = 500
+                    throttle = 50,
+                    debounce = 300
                 },
                 view = {
                     entries = 'native'

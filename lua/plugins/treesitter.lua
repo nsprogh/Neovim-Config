@@ -7,7 +7,7 @@ return function (use)
         config = function ()
             require'nvim-treesitter.configs'.setup {
                 highlight = {
-                    enable = false,
+                    enable = true,
                     -- add languages not supported by treesitter here
                     additional_vim_regex_highlighting = false
                 },
