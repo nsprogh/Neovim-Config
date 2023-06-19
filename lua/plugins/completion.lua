@@ -1,61 +1,8 @@
--- Completion plugin
--- nvim-compe is deprecated, use nvim-cmp instead
--- return {
---     'hrsh7th/nvim-compe',
---     config = function ()
---         require'compe'.setup {
---             enabled = true,
---             autocomplete = true,
-
---             source = {
---                 path = true,
---                 calc = true,
---                 nvim_lsp = true,
---                 nvim_lua = false,
---                 vsnip = false
---             }
---         }
---     end
--- }
-
-local function has_words_before ()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local function map_select_next (fallback)
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-
-    if cmp.visible() then
-        cmp.select_next_item()
-    elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-    elseif has_words_before() then
-        cmp.complete()
-    else
-        fallback()
-    end
-end
-
-local function map_select_prev (fallback)
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-
-    if cmp.visible() then
-        cmp.select_prev_item()
-    elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-    else
-        fallback()
-    end
-end
-
 -- Successor to nvim-compe
 -- TODO setup in a way that is a bit more modular, so that we can load it even
 -- if lsp isn't loaded yet
-return function (use)
-    use {
+return {
+    {
         'hrsh7th/nvim-cmp',
         as = 'completion',
         requires = {
@@ -72,6 +19,39 @@ return function (use)
         },
         config = function ()
             vim.o.completeopt = 'menu,menuone,noselect'
+
+            local function has_words_before ()
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+            end
+
+            local function map_select_next (fallback)
+                local cmp = require 'cmp'
+                local luasnip = require 'luasnip'
+
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end
+
+            local function map_select_prev (fallback)
+                local cmp = require 'cmp'
+                local luasnip = require 'luasnip'
+
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                else
+                    fallback()
+                end
+            end
 
             local luasnip = require 'luasnip'
             local cmp = require 'cmp'
@@ -115,9 +95,8 @@ return function (use)
                 }
             }
         end
-    }
-
-    use {
+    },
+    {
         'hrsh7th/cmp-nvim-lsp',
         after = {'lsp', 'completion'},
         config = function ()
@@ -128,4 +107,4 @@ return function (use)
             require'lspconfig'.tsserver.setup {capabilities = capabilities}
         end
     }
-end
+}

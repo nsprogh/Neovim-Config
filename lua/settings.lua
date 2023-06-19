@@ -29,3 +29,10 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.cursorline = true
 vim.wo.colorcolumn='80'
+
+-- GUI Options
+if vim.g.neovide then
+    vim.o.guifont = "FantasqueSansM Nerd Font:h12"
+    vim.g.neovide_refresh_rate = 75
+    vim.g.neovide_cursor_animation_length = 0
+end

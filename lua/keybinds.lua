@@ -19,7 +19,7 @@ vim.keymap.set('i', '<Tab>', command.smart_tab, { expr = true })
 vim.keymap.set('i', '<S-Tab>', command.smart_tab_rev, { expr = true })
 
 ---- ToggleTerm ----
-vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
+--vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
 
 ---- Convenience ----
 -- Swap between current and previous buffer

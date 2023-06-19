@@ -8,6 +8,7 @@ return {
         'rust', 'php', 'typescript', 'javascript', 'c', 'cpp', 'tex',
         'typescriptreact', 'javascriptreact'
     },
+    cmd = {'LspInfo', 'LspStart'},
     config = function ()
         require'lspconfig'.eslint.setup {}
         require'lspconfig'.rust_analyzer.setup {}

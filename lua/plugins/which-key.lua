@@ -1,19 +1,26 @@
+vim.o.timeout = true
+vim.o.timeoutlen = 500
+
 return {
     'folke/which-key.nvim',
+    keys = {'<leader>', 'z'},
     config = function ()
         local commands = require'commands'
 
-        vim.o.timeout = true
-        vim.o.timeoutlen = 500
         require'which-key'.setup {
             plugins = {
-                spelling = {
-                    suggestions = 8
-                },
                 presets = {
-                    g = false
+                    g = false,
+                    operators = false,
+                    motions = false,
+                    windows = false,
+                    nav = false,
+                    -- TODO setup lazy-load keys for this somehow
+                    text_objects = true,
                 },
-                registers = false
+                marks = false,
+                registers = false,
+                spelling = false
             }
         }
 

@@ -1,9 +1,12 @@
 -- Treesitter
-return function (use)
-    use {
+return {
+    {
         'nvim-treesitter/nvim-treesitter',
         as = 'treesitter',
         run = ':TSUpdate',
+        -- TODO hardcode the treesitter languages to install and match it to
+        -- this list
+        ft = {'typescript', 'html', 'markdown', 'rust', 'php', 'java', 'json'},
         config = function ()
             require'nvim-treesitter.configs'.setup {
                 highlight = {
@@ -16,16 +19,18 @@ return function (use)
                 context_commentstring = {enable = true}
             }
 
+            require'nvim-treesitter.install'.prefer_git = false
+
             -- Maybe setup and tune folding later
             --vim.o.foldmethod = 'expr'
             --vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
         end
-    }
+    },
 
-    -- use {'nvim-treesitter/nvim-treesitter-angular', after = 'treesitter'}
+    --{'nvim-treesitter/nvim-treesitter-angular', after = 'treesitter'},
 
     -- Treesitter equivalent to context.vim
-    use {
+    {
         'nvim-treesitter/nvim-treesitter-context',
         after = 'treesitter',
         config = function ()
@@ -34,12 +39,12 @@ return function (use)
                 max_lines = 5
             }
         end
-    }
+    },
 
     -- This updates commentstring as needed when in polyglot filetypes
     -- (e.g. TSX or HTML files)
-    use {
+    {
         'JoosepAlviste/nvim-ts-context-commentstring',
         after = {'treesitter', 'nvim-treesitter-context'}
     }
-end
+}

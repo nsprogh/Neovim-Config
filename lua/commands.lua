@@ -57,10 +57,6 @@ function command.lsp_references ()
     }
 end
 
-function command.toggle_all_terminals ()
-    require'toggleterm'.toggle_all()
-end
-
 function command.goto_buffer ()
     require'telescope.builtin'.buffers()
 end
