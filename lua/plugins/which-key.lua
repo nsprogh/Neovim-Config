@@ -59,7 +59,8 @@ return {
                 w = {vim.lsp.buf.code_action, 'Code Actions'},
                 r = {vim.lsp.buf.rename, 'Rename Symbol'},
                 q = {commands.quickfix, 'Quick Fix'},
-                i = {'<cmd>LspInfo<cr>', 'LSP Info'}
+                i = {'<cmd>LspInfo<cr>', 'LSP Info'},
+                f = {'<cmd>LspRestart<cr>', 'Restart Language Server'}
             },
             t = {
                 name = 'Terminals',

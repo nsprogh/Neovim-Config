@@ -14,9 +14,8 @@ return {
                     -- add languages not supported by treesitter here
                     additional_vim_regex_highlighting = false
                 },
-                indent = {enable = false},
+                indent = {enable = true},
                 autopairs = {enable = false},
-                context_commentstring = {enable = true}
             }
 
             require'nvim-treesitter.install'.prefer_git = false
@@ -43,8 +42,11 @@ return {
 
     -- This updates commentstring as needed when in polyglot filetypes
     -- (e.g. TSX or HTML files)
-    {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        after = {'treesitter', 'nvim-treesitter-context'}
-    }
+    --
+    -- Deprecated
+    --
+    -- {
+    --     'JoosepAlviste/nvim-ts-context-commentstring',
+    --     after = {'treesitter', 'nvim-treesitter-context'}
+    -- }
 }

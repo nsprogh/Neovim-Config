@@ -11,7 +11,7 @@ return {
             {'hrsh7th/cmp-cmdline', after = 'completion'},
             {'saadparwaiz1/cmp_luasnip',
                 after = 'completion',
-                requires = 'l3mon4d3/luasnip'}
+                requires = {'l3mon4d3/luasnip', after = 'lsp'}}
         },
         after = {
             'lsp',

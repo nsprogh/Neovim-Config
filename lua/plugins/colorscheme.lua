@@ -6,18 +6,20 @@
 
 -- Nord Color Scheme
 -- Lots of features supported by this one
-return {
-    'shaunsingh/nord.nvim',
-    as = 'colorscheme',
-    config = function ()
-        -- Color Setup
-        vim.g.nord_contrast = true
-        vim.g.nord_borders = true
-        vim.g.nord_disable_background = false
-        vim.g.nord_italics = true
-        require'nord'.set()
-    end
-}
+-- Missing support for lsp syntactic hinting
+--
+-- return {
+--     'shaunsingh/nord.nvim',
+--     as = 'colorscheme',
+--     config = function ()
+--         -- Color Setup
+--         vim.g.nord_contrast = true
+--         vim.g.nord_borders = true
+--         vim.g.nord_disable_background = false
+--         vim.g.nord_italics = true
+--         require'nord'.set()
+--     end
+-- }
 
 -- A little weird right now
 -- return {
@@ -34,3 +36,15 @@ return {
 --         vim.cmd[[colorscheme NeoSolarized]]
 --     end
 -- }
+
+return {
+    'rebelot/kanagawa.nvim',
+    as = 'colorscheme',
+    config = function ()
+        require'kanagawa'.setup {
+            theme = 'dragon'
+        }
+        
+        vim.cmd('colorscheme kanagawa-dragon')
+    end
+}
