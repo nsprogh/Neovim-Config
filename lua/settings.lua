@@ -24,6 +24,11 @@ vim.o.background = 'dark'
 vim.o.termguicolors = true
 vim.o.cmdheight = 0
 
+-- Title
+vim.o.title = true
+vim.o.titlelen = 0
+vim.o.titlestring = 'Neovim - %{expand("%:t")}'
+
 -- Window-Local Options
 vim.wo.number = true
 vim.wo.relativenumber = true
