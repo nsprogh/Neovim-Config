@@ -50,7 +50,7 @@ return {
                 m = {'<cmd>NvimTreeFindFile<cr>', 'Show Current Buffer in File Tree'},
                 u = {'<cmd>UndotreeToggle<cr>', 'Undo Tree'},
                 j = {'<cmd>TagbarToggle<cr>', 'Tags'},
-                o = {'<cmd>vertical Git<cr>', 'Git'},
+                o = {'<cmd>tab Git<cr>', 'Git'},
                 e = {'<cmd>TroubleToggle document_diagnostics<cr>', 'Document Errors'}
             },
             l = {
