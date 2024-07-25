@@ -1,7 +1,38 @@
 local command = require 'commands'
 
-vim.g.mapleader = ' ' -- spacebar for leader
 -- For leader keybinds see which-key plugin configuration
+vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {desc = 'Clear Messages'})
+
+-- Find
+vim.keymap.set('n', '<Leader>ff', command.project_files, {desc = 'Find Files'})
+vim.keymap.set('n', '<Leader>fr', command.recent_files, {desc = 'Find Recent File'})
+vim.keymap.set('n', '<Leader>fg', command.project_grep, {desc = 'Find Word'})
+vim.keymap.set('n', '<Leader>fm', command.search_man_pages, {desc = 'Find Man Page'})
+vim.keymap.set('n', '<Leader>fh', command.search_help, {desc = 'Find Help Page'})
+vim.keymap.set('n', '<Leader>fp', command.project_open, {desc = 'Find Project'})
+
+-- Sidebar
+vim.keymap.set('n', '<Leader>kn', '<cmd>NvimTreeToggle<cr>', {desc = 'File Tree'})
+vim.keymap.set('n', '<Leader>km', '<cmd>NvimTreeFindFile<cr>', {desc = 'Show Current Buffer in File Tree'})
+vim.keymap.set('n', '<Leader>ku', '<cmd>UndotreeToggle<cr>', {desc = 'Undo Tree'})
+vim.keymap.set('n', '<Leader>kj', '<cmd>TagbarToggle<cr>', {desc = 'Tags'})
+vim.keymap.set('n', '<Leader>ko', '<cmd>tab Git<cr>', {desc = 'Git'})
+vim.keymap.set('n', '<Leader>ke', '<cmd>TroubleToggle document_diagnostics<cr>', {desc = 'Document Errors'})
+
+-- LSP
+vim.keymap.set('n', '<Leader>le', vim.diagnostic.open_float, {desc = 'Messages'})
+vim.keymap.set('n', '<Leader>lw', vim.lsp.buf.code_action, {desc = 'Code Actions'})
+vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, {desc = 'Rename Symbol'})
+vim.keymap.set('n', '<Leader>lq', command.quickfix, {desc = 'Quick Fix'})
+vim.keymap.set('n', '<Leader>li', '<cmd>LspInfo<cr>', {desc = 'LSP Info'})
+vim.keymap.set('n', '<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'})
+
+-- Terminal
+vim.keymap.set('n', '<Leader>ta', '<cmd>ToggleTermToggleAll<cr>', {desc = 'Show/Hide Terminals'})
+
+-- Miscellaneous
+vim.keymap.set('n', '<Leader>mp', '<cmd>Lazy<cr>', {desc = 'Package Manager Status'})
+
 
 -- Goto
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition'})

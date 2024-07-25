@@ -4,6 +4,9 @@
 --vim.g.do_filetype_lua = 1
 --vim.g.did_load_filetypes = 0
 
+vim.g.mapleader = ' ' -- spacebar for leader
+vim.g.maplocalleader = '\\' -- backslash for local
+
 -- Editor Options
 vim.o.tabstop = 4
 vim.o.softtabstop = 0

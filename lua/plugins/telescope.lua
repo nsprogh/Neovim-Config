@@ -1,7 +1,7 @@
 return {
-    'nvim-telescope/telescope.nvim',
-    module = 'telescope',
-    requires = {
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    lazy = true,
+    dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-ui-select.nvim',
         'nvim-telescope/telescope-file-browser.nvim',

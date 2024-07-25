@@ -58,16 +58,8 @@ return {
 
     {
         'lukas-reineke/headlines.nvim',
-        ft = {'markdown'},
-        config = function()
-            require('headlines').setup()
-        end
+        ft = {'markdown'}
     },
 
-    {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require'colorizer'.setup()
-        end
-    },
+    'norcalli/nvim-colorizer.lua'
 }

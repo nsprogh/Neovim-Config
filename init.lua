@@ -1,4 +1,4 @@
 require 'settings'
-require 'plugins'
+require 'packagemanager'
 require 'autocommands'
 require 'keybinds'

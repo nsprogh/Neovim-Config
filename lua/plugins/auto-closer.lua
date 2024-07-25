@@ -9,7 +9,8 @@
 -- vim-closer.
 return {
     'windwp/nvim-autopairs',
-    after = 'completion',
+    dependencies = {'completion'},
+    event = 'InsertEnter',
     config = function ()
         require('nvim-autopairs').setup {
             -- behaves strangely
