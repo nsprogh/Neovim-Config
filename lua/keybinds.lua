@@ -27,11 +27,16 @@ vim.keymap.set('n', '<Leader>lq', command.quickfix, {desc = 'Quick Fix'})
 vim.keymap.set('n', '<Leader>li', '<cmd>LspInfo<cr>', {desc = 'LSP Info'})
 vim.keymap.set('n', '<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'})
 
--- Git
-vim.keymap.set('n', '<Leader>gg', '<cmd>tab Git<cr>', {desc = 'Git Status'})
-vim.keymap.set('n', '<Leader>gp', '<cmd>Git pull<cr>', {desc = 'Git Pull'})
-vim.keymap.set('n', '<Leader>gr', '<cmd>Git rebase ', {desc = 'Git rebase :branch:'})
-vim.keymap.set('n', '<Leader>gir', '<cmd>Git rebase -i ', {desc = 'Git rebase :branch: (interactive)'})
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('lsp_keybinds', { clear = true }),
+    desc = 'LSP Actions',
+    callback = function (event)
+        local options = {buffer = event.buf}
+
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, options)
+        vim.keymap.set({'n', 'x'}, '<Leader>lF', function () vim.lsp.buf.format({ async = true }) end, options)
+    end
+})
 
 -- Terminal
 vim.keymap.set('n', '<Leader>ta', '<cmd>ToggleTermToggleAll<cr>', {desc = 'Show/Hide Terminals'})

@@ -13,6 +13,7 @@ return {
                     .default_capabilities(vim.lsp.protocol.make_client_capabilities())
                 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
                 require('lspconfig').tsserver.setup({capabilities = capabilities})
+                require('lspconfig').rust_analyzer.setup({capabilities = capabilities})
             end
         },
         {
@@ -43,9 +44,7 @@ return {
     cmd = {'LspInfo', 'LspStart'},
     config = function ()
         require('lspconfig').eslint.setup({})
-        require('lspconfig').rust_analyzer.setup({})
         require('lspconfig').intelephense.setup({})
-        require('lspconfig').tsserver.setup({})
         require('lspconfig').texlab.setup({})
         require('lspconfig').ccls.setup({})
         require('lspconfig').psalm.setup({
