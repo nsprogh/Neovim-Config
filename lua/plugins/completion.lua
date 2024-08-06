@@ -79,6 +79,7 @@ return {
             },
             sources = {
                 {name = 'nvim_lsp', group_index = 1},
+                {name = 'nvim_lsp_signature_help', group_index = 1},
                 {name = 'luasnip', group_index = 1},
                 -- Don't show buffer completion if the others are available
                 -- **Since we aren't loading nvim-cmp until lsp is loaded and

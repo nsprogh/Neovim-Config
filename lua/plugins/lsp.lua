@@ -15,6 +15,10 @@ return {
                 require('lspconfig').tsserver.setup({capabilities = capabilities})
             end
         },
+        {
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            dependencies = {'completion'}
+        }
         -- {
         --     'ray-x/lsp_signature.nvim',
         --     name = 'signature-help',

@@ -14,6 +14,13 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
     end
 })
 
+-- For some reason, setting opt.mouse too early seems to have no effect
+vim.api.nvim_create_autocmd('VimEnter', {
+    callback = function ()
+        vim.o.mouse = 'a'
+    end
+})
+
 -- Seems to be happening on more than just json files for some reason
 --vim.api.nvim_create_autocmd('FileType', {
 --    pattern = 'json',

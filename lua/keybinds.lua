@@ -27,6 +27,12 @@ vim.keymap.set('n', '<Leader>lq', command.quickfix, {desc = 'Quick Fix'})
 vim.keymap.set('n', '<Leader>li', '<cmd>LspInfo<cr>', {desc = 'LSP Info'})
 vim.keymap.set('n', '<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'})
 
+-- Git
+vim.keymap.set('n', '<Leader>gg', '<cmd>tab Git<cr>', {desc = 'Git Status'})
+vim.keymap.set('n', '<Leader>gp', '<cmd>Git pull<cr>', {desc = 'Git Pull'})
+vim.keymap.set('n', '<Leader>gr', '<cmd>Git rebase ', {desc = 'Git rebase :branch:'})
+vim.keymap.set('n', '<Leader>gir', '<cmd>Git rebase -i ', {desc = 'Git rebase :branch: (interactive)'})
+
 -- Terminal
 vim.keymap.set('n', '<Leader>ta', '<cmd>ToggleTermToggleAll<cr>', {desc = 'Show/Hide Terminals'})
 
