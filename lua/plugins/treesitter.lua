@@ -1,4 +1,5 @@
 -- Treesitter
+
 return {
     'nvim-treesitter/nvim-treesitter',
     name = 'treesitter',
@@ -16,22 +17,58 @@ return {
     },
     -- TODO hardcode the treesitter languages to install and match it to
     -- this list
-    ft = {'typescript', 'html', 'markdown', 'rust', 'php', 'java', 'json'},
-    config = function ()
-        require'nvim-treesitter.configs'.setup {
-            highlight = {
-                enable = true,
-                -- add languages not supported by treesitter here
-                additional_vim_regex_highlighting = false
-            },
-            indent = {enable = true},
-            autopairs = {enable = false},
-        }
+    cmd = {'TSIntall', 'TSInstallInfo', 'TSUpdate'},
+    event = 'BufEnter',
+    opts = {
+        ensure_installed = {
+            'bash',
+            'c',
+            'typescript',
+            'html',
+            'markdown',
+            'rust',
+            'php',
+            'java',
+            'json',
+            'terraform',
+            'lua',
+            'python',
+            'vim',
+            'vimdoc',
+            'yaml',
+            'markdown_inline',
+        },
+        highlight = {
+            enable = true,
+            -- add languages not supported by treesitter here
+            additional_vim_regex_highlighting = false
+        },
+        indent = {enable = true},
+        autopairs = {enable = false},
+    },
+    config = function (_, opts)
+        require('nvim-treesitter.configs').setup(opts)
 
-        require'nvim-treesitter.install'.prefer_git = false
+        require('nvim-treesitter.install').prefer_git = false
 
-        -- Maybe setup and tune folding later
-        --vim.o.foldmethod = 'expr'
-        --vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+        local groupid = vim.api.nvim_create_augroup('treesitter', { clear = true })
+
+        -- TODO setup tweaks for typescript
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = {'typescript', 'json'},
+            group = groupid,
+            callback = function (args)
+                vim.wo.foldmethod = 'expr'
+                vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            end
+        })
+
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = 'json',
+            group = groupid,
+            callback = function (args)
+                vim.wo.foldlevelstart = 1
+            end
+        })
     end
 }

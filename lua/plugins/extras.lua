@@ -23,24 +23,17 @@ return {
         cmd = {'UndotreeToggle', 'UndotreeOpen'}
     },
 
-    -- Tags side-panel
-    {
-        'preservim/tagbar',
-        cmd = {'TagbarToggle', 'TagbarOpen'}
-    },
-
     -- Indent guides
     {
         'lukas-reineke/indent-blankline.nvim',
-        config = function ()
-            require'ibl'.setup {
-                indent = { char = '│' },
-                scope = {
-                    show_start = false,
-                    show_end = false
-                }
+        main = 'ibl',
+        opts = {
+            indent = { char = '│' },
+            scope = {
+                show_start = false,
+                show_end = false
             }
-        end
+        }
     },
 
     -- <C-A>/<C-X> increment decrement
@@ -56,16 +49,23 @@ return {
     --     end
     -- },
 
-    {
-        'lukas-reineke/headlines.nvim',
-        ft = {'markdown'}
-    },
-
     'norcalli/nvim-colorizer.lua',
 
+    -- Plugin below this one is just better
+    --{
+    --    'lukas-reineke/headlines.nvim',
+    --    dependencies = 'treesitter',
+    --    ft = {'markdown'},
+    --    config = true
+    --},
     {
-        'm4xshen/hardtime.nvim',
-        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-        opts = {}
-    },
+        'MeanderingProgrammer/render-markdown.nvim',
+        -- dependencies = { 'treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        dependencies = { 'treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ft = 'markdown',
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
+    }
 }

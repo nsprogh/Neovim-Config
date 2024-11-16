@@ -1,6 +1,6 @@
 -- Diagnostics summary
 return {
-    'folke/trouble.nvim',
+    'folke/trouble.nvim', version = 'v3.*',
     name = 'diagnostics',
     -- Uncomment to enable icons
     dependencies = {'kyazdani42/nvim-web-devicons'},

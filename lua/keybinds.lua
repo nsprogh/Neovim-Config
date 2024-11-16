@@ -1,6 +1,6 @@
 local command = require 'commands'
 
--- For leader keybinds see which-key plugin configuration
+-- For leader groups see which-key plugin configuration
 vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {desc = 'Clear Messages'})
 
 -- Find
@@ -15,7 +15,7 @@ vim.keymap.set('n', '<Leader>fp', command.project_open, {desc = 'Find Project'})
 vim.keymap.set('n', '<Leader>kn', '<cmd>NvimTreeToggle<cr>', {desc = 'File Tree'})
 vim.keymap.set('n', '<Leader>km', '<cmd>NvimTreeFindFile<cr>', {desc = 'Show Current Buffer in File Tree'})
 vim.keymap.set('n', '<Leader>ku', '<cmd>UndotreeToggle<cr>', {desc = 'Undo Tree'})
-vim.keymap.set('n', '<Leader>kj', '<cmd>TagbarToggle<cr>', {desc = 'Tags'})
+--vim.keymap.set('n', '<Leader>kj', '<cmd>TagbarToggle<cr>', {desc = 'Tags'})
 vim.keymap.set('n', '<Leader>ko', '<cmd>tab Git<cr>', {desc = 'Git'})
 vim.keymap.set('n', '<Leader>ke', '<cmd>TroubleToggle document_diagnostics<cr>', {desc = 'Document Errors'})
 
@@ -57,8 +57,8 @@ vim.keymap.set('n', 'gb', command.goto_buffer, {desc = 'Goto Buffer'})
 vim.keymap.set('n', ';', vim.lsp.buf.hover)
 
 -- LSP tweaks
-vim.keymap.set('i', '<Tab>', command.smart_tab, { expr = true })
-vim.keymap.set('i', '<S-Tab>', command.smart_tab_rev, { expr = true })
+--vim.keymap.set('i', '<Tab>', command.smart_tab, { expr = true })
+--vim.keymap.set('i', '<S-Tab>', command.smart_tab_rev, { expr = true })
 
 ---- ToggleTerm ----
 --vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
