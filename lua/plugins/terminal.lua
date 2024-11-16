@@ -1,9 +1,9 @@
 function toggle()
-    require'toggleterm'.toggle(vim.v.count)
+    require('toggleterm').toggle(vim.v.count)
 end
 
 function toggle_all()
-    require'toggleterm'.toggle_all()
+    require('toggleterm').toggle_all()
 end
 
 -- vim.api.nvim_create_autocmd('TermEnter', {
@@ -14,11 +14,12 @@ end
 -- })
 
 return {
-    'akinsho/toggleterm.nvim',
+    'akinsho/toggleterm.nvim', tag = 'v2.13.0',
     name = 'terminal',
     keys = {
         {'<C-\\>', toggle, mode = {'n', 'i', 't'}},
-        {'<A-\\>', toggle_all, mode = {'n', 'i', 't'}}
+        {'<A-\\>', toggle_all, mode = {'n', 'i', 't'}},
+        {'<leader>ta', toggle_all, desc = 'Show/Hide Terminals'}
     },
     opts = {
         -- size = 80,

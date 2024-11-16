@@ -7,6 +7,8 @@
 vim.g.mapleader = ' ' -- spacebar for leader
 vim.g.maplocalleader = '\\' -- backslash for local
 
+vim.g.sidebarwidth = 50 -- Custom var for setting the width of sidebars
+
 -- Editor Options
 vim.o.tabstop = 4
 vim.o.softtabstop = 0
@@ -25,7 +27,7 @@ vim.o.mouse = 'a'
 vim.o.undofile = true
 vim.o.background = 'dark'
 vim.o.termguicolors = true
-vim.o.cmdheight = 0
+--vim.o.cmdheight = 0
 
 -- Title
 vim.o.title = true

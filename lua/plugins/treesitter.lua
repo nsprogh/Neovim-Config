@@ -1,11 +1,49 @@
 -- Treesitter
 
+---Table of filetype => parsers assocations. If no key is specified then the
+---ft and parser are assumed to be the same. Parsers can be a single value or
+---a table of values that are merged into the final set of parsers.
+local filetypes = {
+    'bash',
+    'c',
+    'typescript',
+    'html',
+    'rust',
+    'php',
+    'java',
+    'json',
+    'terraform',
+    'lua',
+    'python',
+    'vim',
+    'vimdoc',
+    'yaml',
+    markdown = {'markdown', 'markdown_inline'},
+}
+
+local fts = {}
+local parsers = {}
+for ft, parser in pairs(filetypes) do
+    if type(ft) == 'string' then
+        table.insert(fts, ft)
+    else
+        table.insert(fts, parser)
+    end
+
+    if type(parser) == 'table' then
+        for _, item in ipairs(parser) do
+            table.insert(parsers, item)
+        end
+    else
+        table.insert(parsers, parser)
+    end
+end
+
 return {
     'nvim-treesitter/nvim-treesitter',
     name = 'treesitter',
     build = ':TSUpdate',
     dependencies = {
-        --'nvim-treesitter/nvim-treesitter-angular',
         {
             -- Treesitter equivalent to context.vim
             'nvim-treesitter/nvim-treesitter-context',
@@ -15,29 +53,10 @@ return {
             }
         },
     },
-    -- TODO hardcode the treesitter languages to install and match it to
-    -- this list
     cmd = {'TSIntall', 'TSInstallInfo', 'TSUpdate'},
-    event = 'BufEnter',
+    ft = fts,
     opts = {
-        ensure_installed = {
-            'bash',
-            'c',
-            'typescript',
-            'html',
-            'markdown',
-            'rust',
-            'php',
-            'java',
-            'json',
-            'terraform',
-            'lua',
-            'python',
-            'vim',
-            'vimdoc',
-            'yaml',
-            'markdown_inline',
-        },
+        ensure_installed = parsers,
         highlight = {
             enable = true,
             -- add languages not supported by treesitter here

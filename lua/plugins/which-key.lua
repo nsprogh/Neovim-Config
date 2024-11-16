@@ -1,6 +1,3 @@
-vim.o.timeout = true
-vim.o.timeoutlen = 500
-
 local function show()
     require('which-key').show({ global = false })
 end
@@ -26,9 +23,11 @@ return {
             spelling = false
         }
     },
+    init = function ()
+        vim.go.timeout = true
+        vim.go.timeoutlen = 500
+    end,
     config = function (_, opts)
-        local commands = require('commands')
-
         require('which-key').setup(opts)
         require('which-key').add({
             {'<leader>c', group = 'Clear'},
@@ -36,7 +35,8 @@ return {
             {'<leader>k', group = 'Sidebar'},
             {'<leader>l', group = 'LSP'},
             {'<leader>t', group = 'Terminal'},
-            {'<leader>m', group = 'Miscellaneous'}
+            {'<leader>m', group = 'Miscellaneous'},
+            {'<leader>r', group = 'Remote Session'}
         })
     end
 }

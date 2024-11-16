@@ -4,4 +4,4 @@
 
 -- TODO see if we can lazy load this with "<Plug>Commentary" and
 -- "<Plug>CommentaryLine" cmds
-return {'tpope/vim-commentary'}
+return {'tpope/vim-commentary', tag = 'v1.3'}

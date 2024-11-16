@@ -3,7 +3,7 @@
 return {
     'hoob3rt/lualine.nvim',
     -- Uncomment to use icons on status line
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     lazy = false,
     opts = {
         options = {
@@ -47,6 +47,11 @@ return {
             },
             lualine_z = {'tabs'}
         },
-        extensions = {'nvim-tree', 'fugitive'}
+        extensions = {
+            'nvim-tree',
+            'fugitive',
+            'toggleterm',
+            'man'
+        }
     },
 }

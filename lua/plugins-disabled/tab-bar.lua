@@ -4,7 +4,7 @@
 return {
     'akinsho/nvim-bufferline.lua',
     -- Uncomment to use icons
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     opts = {
         options = {
             view = 'multiwindow',

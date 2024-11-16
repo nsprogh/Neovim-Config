@@ -1,12 +1,15 @@
 return {
-    'kyazdani42/nvim-tree.lua',
-    cmd = {'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFindFile'},
+    'kyazdani42/nvim-tree.lua', version = 'v1.*',
+    keys = {
+        {'<leader>kn', vim.cmd.NvimTreeToggle, desc = 'File Tree'},
+        {'<leader>km', vim.cmd.NvimTreeFindFile, desc = 'Show Current Buffer in File Tree'}
+    },
     -- Uncomment to use icons on status line
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     opts = {
         sync_root_with_cwd = true,
         view = {
-            width = 40
+            width = vim.g.sidebarwidth
         },
         git = {
             ignore = true
@@ -21,5 +24,10 @@ return {
                 -- }
             }
         }
-    }
+    },
+    init = function ()
+        -- Disable netrw
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+    end
 }

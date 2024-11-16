@@ -1,12 +1,24 @@
 return {
     -- Git client
     {
-        'tpope/vim-fugitive',
-        cmd = {'Git'}
+        'tpope/vim-fugitive', tag = 'v3.7',
+        keys = {
+            {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
+        }
     },
 
     -- Surround text with brackets/parens/quotes/etc.
-    'tpope/vim-surround',
+    {'tpope/vim-surround', tag = 'v2.2'},
+
+    -- LaTeX
+    {
+        'lervag/vimtex', tag = 'v2.15',
+        lazy = false,
+        -- ft = {'.tex'},
+        init = function ()
+            vim.g.vimtex_view_method = 'zathura'
+        end
+    },
 
     -- Fuzzy finder
     -- Supplanted by Telescope.nvim
@@ -19,14 +31,21 @@ return {
 
     -- Undo tree side-panel
     {
-        'mbbill/undotree',
-        cmd = {'UndotreeToggle', 'UndotreeOpen'}
+        'mbbill/undotree', tag = 'rel_6.1',
+        keys = {
+            {'<leader>ku', vim.cmd.UndotreeToggle, desc = 'Undo Tree'}
+        },
+        init = function ()
+            vim.g.undotree_SplitWidth = vim.g.sidebarwidth
+        end
     },
 
     -- Indent guides
     {
-        'lukas-reineke/indent-blankline.nvim',
+        'lukas-reineke/indent-blankline.nvim', version = 'v3.*',
         main = 'ibl',
+        ---@module 'ibl'
+        ---@type ibl.config
         opts = {
             indent = { char = '│' },
             scope = {
@@ -59,7 +78,7 @@ return {
     --    config = true
     --},
     {
-        'MeanderingProgrammer/render-markdown.nvim',
+        'MeanderingProgrammer/render-markdown.nvim', version = 'v7.*',
         -- dependencies = { 'treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
         dependencies = { 'treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons

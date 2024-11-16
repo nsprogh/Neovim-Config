@@ -27,10 +27,17 @@
 --    }
 --}
 
+local function toggle()
+    return vim.cmd.Vista('nvim_lsp')
+end
+
 return {
     'liuchengxu/vista.vim',
     name = 'tagbar',
     keys = {
-        {'<Leader>kj', '<cmd>Vista nvim_lsp<cr>', desc = 'Tags (LSP)'}
-    }
+        {'<Leader>kj', toggle, desc = 'Tags (LSP)'}
+    },
+    init = function ()
+        vim.g.vista_sidebar_width = vim.g.sidebarwidth
+    end
 }
