@@ -65,7 +65,7 @@ return {
         {'<leader>gr', goto_references, desc = 'Goto References'}
     },
     dependencies = {
-        'nvim-lua/plenary.nvim',
+        {'nvim-lua/plenary.nvim', version = 'v0.*'},
         'nvim-telescope/telescope-ui-select.nvim',
         'nvim-telescope/telescope-file-browser.nvim',
         'nvim-telescope/telescope-project.nvim'
