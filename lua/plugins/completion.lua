@@ -34,7 +34,15 @@ return {
         accept = { auto_brackets = { enabled = true } },
 
         -- experimental signature help support
-        trigger = { signature_help = { enabled = true } }
+        trigger = { signature_help = { enabled = true } },
+
+        completion = {
+            trigger = {
+                -- For use with the 'super-tab' keymaps so that hitting tab to
+                -- go to the next entry in the snippet doesn't proc completion
+                show_in_snippet = false
+            }
+        }
     },
     -- allows extending the enabled_providers array elsewhere in your config
     -- without having to redefining it

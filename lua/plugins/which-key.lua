@@ -3,12 +3,15 @@ local function show()
 end
 
 return {
-    'folke/which-key.nvim',
+    'folke/which-key.nvim', version = 'v3.*',
     event = 'VeryLazy',
     keys = {
         {'<Leader>?', show, desc = 'Buffer Local Keymaps (which-key)'}
     },
     opts = {
+        icons = {
+            mappings = false
+        },
         plugins = {
             presets = {
                 g = false,

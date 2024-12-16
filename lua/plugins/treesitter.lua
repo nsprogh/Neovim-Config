@@ -86,7 +86,7 @@ return {
             pattern = 'json',
             group = groupid,
             callback = function (args)
-                vim.wo.foldlevelstart = 1
+                vim.wo.foldlevel = 1
             end
         })
     end

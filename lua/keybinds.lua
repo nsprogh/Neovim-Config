@@ -45,7 +45,7 @@ vim.keymap.set('n', '<Leader>mp', '<cmd>Lazy<cr>', {desc = 'Package Manager Stat
 -- Goto
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition'})
 vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {desc = 'Goto Type Definition'})
---vim.keymap.set('n', 'gr', command.lsp_references, {desc = 'Goto References'})
+vim.keymap.set('n', 'gr', command.lsp_references, {desc = 'Goto References'})
 vim.keymap.set('n', 'gw', vim.diagnostic.goto_prev, {desc = 'Goto Previous Diagnostic'})
 vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, {desc = 'Goto Next Diagnostic'})
 --vim.keymap.set('n', 'gb', command.goto_buffer, {desc = 'Goto Buffer'})
