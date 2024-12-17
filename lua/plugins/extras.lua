@@ -2,6 +2,7 @@ return {
     -- Git client
     {
         'tpope/vim-fugitive', tag = 'v3.7',
+        cmd = {'Git'},
         keys = {
             {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
         }

@@ -1,8 +1,30 @@
+local function quickfix()
+    vim.lsp.buf.code_action({
+        only = {'quickfix'},
+        apply = true
+    })
+end
+
+local function lsp_references()
+    require('telescope.builtin').lsp_references({
+        initial_mode = 'normal',
+        layout_strategy = 'vertical',
+        layout_config = {
+            width = 0.5
+        },
+        trim_text = true
+    })
+end
+
 -- LSP and autocompletion
 return {
     'neovim/nvim-lspconfig', version = 'v1.*',
     name = 'lsp',
     dependencies = {'completion'},
+    keys = {
+        {'<Leader>li', '<cmd>checkhealth lspconfig<cr>', {desc = 'LSP Info'}},
+        {'<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'}}
+    },
     -- Only enable for file types that the language server is actually
     -- enabled for
     ft = {
@@ -38,7 +60,7 @@ return {
                         },
                         -- Make the server aware of Neovim runtime files
                         workspace = {
-                            checkThirdParty = false,
+                            checkThirdParty = true,
                             library = {
                                 vim.env.VIMRUNTIME
                                 -- Depending on the usage, you might want to add additional paths here.
@@ -95,5 +117,27 @@ return {
         --        vim.lsp.codelens.refresh({ bufnr = args.buf })
         --    end
         --})
+
+        -- Override usual vim actions with LSP equivalents
+        vim.api.nvim_create_autocmd('LspAttach', {
+            group = groupid,
+            desc = 'LSP Buffer-local Keymaps',
+            callback = function (event)
+                local options = {buffer = event.buf}
+
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, options)
+                -- vim.keymap.set({'n', 'x'}, '<Leader>lF', function () vim.lsp.buf.format({ async = true }) end, options)
+                -- This overrides "ex mode" or whatever that does, never heard of it so
+                -- probably won't miss it
+                vim.keymap.set({'n', 'x'}, 'gQ', function () vim.lsp.buf.format({ async = true }) end, options)
+
+                vim.keymap.set('n', '<Leader>lw', vim.lsp.buf.code_action, {desc = 'Code Actions', buffer = event.buf})
+                vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, {desc = 'Rename Symbol', buffer = event.buf})
+                vim.keymap.set('n', '<Leader>lq', quickfix, {desc = 'Quick Fix', buffer = event.buf})
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {desc = 'Goto Definition', buffer = event.buf})
+                vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {desc = 'Goto Type Definition', buffer = event.buf})
+                vim.keymap.set('n', 'gr', lsp_references, {desc = 'Goto References', buffer = event.buf})
+            end
+        })
     end
 }
