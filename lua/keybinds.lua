@@ -61,7 +61,8 @@ vim.keymap.set('n', 'H', 'gT', {desc = 'Next tab'})
 vim.keymap.set('n', 'L', 'gt', {desc = 'Previous tab'})
 vim.keymap.set('n', 'yc', 'yygccp', {remap = true, desc = 'Duplicate a line and comment out the original'})
 vim.keymap.set('n', 'vy', '`[v`]', {desc = 'Select recently pasted/yanked/changed text'})
-vim.keymap.set('n', '<tab>', 'za', {desc = 'Toggle fold under cursor'})
+-- Conflicts with <C-I>
+--vim.keymap.set('n', '<tab>', 'za', {desc = 'Toggle fold under cursor'})
 
 -- Terminal
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')

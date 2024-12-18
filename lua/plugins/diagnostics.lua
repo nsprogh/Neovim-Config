@@ -1,6 +1,10 @@
 -- Diagnostics summary
-local function toggle()
-    return vim.cmd.TroubleToggle('document_diagnostics')
+local function toggle_buffer()
+    return vim.cmd.Trouble('diagnostics', 'toggle', 'filter.buf=0')
+end
+
+local function toggle_all()
+    return vim.cmd.Trouble('diagnostics', 'toggle')
 end
 
 return {
@@ -8,8 +12,10 @@ return {
     name = 'diagnostics',
     -- Uncomment to enable icons
     dependencies = {'nvim-tree/nvim-web-devicons'},
+    cmd = 'Trouble',
     keys = {
-        {'<leader>ke', toggle, desc = 'Document Errors'}
+        {'<leader>ke', toggle_buffer, desc = 'Buffer Errors'},
+        {'<leader>kE', toggle_all, desc = 'All Errors'}
     },
     opts = {
         icons = true,

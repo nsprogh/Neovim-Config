@@ -34,7 +34,7 @@ return {
         accept = { auto_brackets = { enabled = true } },
 
         -- experimental signature help support
-        trigger = { signature_help = { enabled = true } },
+        signature = { enabled = true },
 
         completion = {
             trigger = {
@@ -43,6 +43,10 @@ return {
                 -- For use with the 'super-tab' keymaps so that hitting tab to
                 -- go to the next entry in the snippet doesn't proc completion
                 show_in_snippet = false
+            },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 500
             }
         }
     },

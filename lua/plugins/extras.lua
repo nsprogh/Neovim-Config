@@ -4,6 +4,7 @@ return {
         'tpope/vim-fugitive', tag = 'v3.7',
         cmd = {'Git'},
         keys = {
+            {'<leader>gg', ':Git ', desc = 'Start git command'},
             {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
         }
     },
