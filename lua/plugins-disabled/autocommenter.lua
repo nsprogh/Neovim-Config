@@ -1,3 +1,5 @@
+-- Not needed, builtin to neovim
+
 -- Autocommenter
 --use 'scrooloose/nerdcommenter'
 --use 'tomtom/tcomment_vim'

@@ -1,5 +1,33 @@
 local command = {}
 
+function command.next_error_global()
+    local dlist = vim.diagnostic.get(nil, {severity = {vim.diagnostic.severity.ERROR}})
+    if #dlist == 0 then
+        return
+    end
+
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local target_index = 1
+    local found_next = false
+    for i, value in ipairs(dlist) do
+        if value.bufnr == current_buffer then
+            found_next = true
+            goto continue
+        end
+
+        if found_next then
+            target_index = i
+            break
+        end
+
+        ::continue::
+    end
+
+    local diagnostic = dlist[target_index]
+    vim.api.nvim_set_current_buf(diagnostic.bufnr)
+    vim.api.nvim_win_set_cursor(0, { diagnostic.end_lnum + 1, diagnostic.end_col })
+end
+
 function command.smart_tab ()
     return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
 end

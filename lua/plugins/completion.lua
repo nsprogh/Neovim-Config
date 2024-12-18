@@ -38,6 +38,8 @@ return {
 
         completion = {
             trigger = {
+                show_on_insert_on_trigger_character = false,
+
                 -- For use with the 'super-tab' keymaps so that hitting tab to
                 -- go to the next entry in the snippet doesn't proc completion
                 show_in_snippet = false

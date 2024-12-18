@@ -1,6 +1,7 @@
 local command = require 'commands'
 
 -- For leader groups see which-key plugin configuration
+
 vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {desc = 'Clear Messages'})
 
 -- Find
@@ -32,8 +33,11 @@ vim.keymap.set('n', '<Leader>le', vim.diagnostic.open_float, {desc = 'Messages'}
 vim.keymap.set('n', '<Leader>mp', '<cmd>Lazy<cr>', {desc = 'Package Manager Status'})
 
 -- Goto
+-- Use [d instead
 --vim.keymap.set('n', 'gw', vim.diagnostic.goto_prev, {desc = 'Goto Previous Diagnostic'})
+-- Use ]d instead
 --vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, {desc = 'Goto Next Diagnostic'})
+vim.keymap.set('n', ']E', command.next_error_global, {desc = 'Goto next error'})
 --vim.keymap.set('n', 'gb', command.goto_buffer, {desc = 'Goto Buffer'})
 
 -- View
@@ -48,13 +52,16 @@ vim.keymap.set('n', '<Leader>mp', '<cmd>Lazy<cr>', {desc = 'Package Manager Stat
 
 ---- Convenience ----
 -- Swap between current and previous buffer
-vim.keymap.set('n', '<BS>', '<C-^>')
+vim.keymap.set('n', '<BS>', '<C-^>', {desc = 'Swap current and previous buffer'})
 -- Scroll using ',' and 'm'
-vim.keymap.set('n', ',', '<C-y>')
-vim.keymap.set('n', 'm', '<C-e>')
+vim.keymap.set('n', ',', '<C-y>', {desc = 'Scroll up by line'})
+vim.keymap.set('n', 'm', '<C-e>', {desc = 'Scroll down by line'})
 -- Cycle tabs with 'H' and 'L'
-vim.keymap.set('n', 'H', 'gT')
-vim.keymap.set('n', 'L', 'gt')
+vim.keymap.set('n', 'H', 'gT', {desc = 'Next tab'})
+vim.keymap.set('n', 'L', 'gt', {desc = 'Previous tab'})
+vim.keymap.set('n', 'yc', 'yygccp', {remap = true, desc = 'Duplicate a line and comment out the original'})
+vim.keymap.set('n', 'vy', '`[v`]', {desc = 'Select recently pasted/yanked/changed text'})
+vim.keymap.set('n', '<tab>', 'za', {desc = 'Toggle fold under cursor'})
 
 -- Terminal
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
