@@ -2,6 +2,7 @@ local command = require 'commands'
 
 -- For leader groups see which-key plugin configuration
 
+-- See also <C-l>
 vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {desc = 'Clear Messages'})
 
 -- Find
@@ -37,7 +38,7 @@ vim.keymap.set('n', '<Leader>mp', '<cmd>Lazy<cr>', {desc = 'Package Manager Stat
 --vim.keymap.set('n', 'gw', vim.diagnostic.goto_prev, {desc = 'Goto Previous Diagnostic'})
 -- Use ]d instead
 --vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, {desc = 'Goto Next Diagnostic'})
-vim.keymap.set('n', ']E', command.next_error_global, {desc = 'Goto next error'})
+vim.keymap.set('n', ']E', command.next_error_global, {desc = 'Goto Next Error All Buffers'})
 --vim.keymap.set('n', 'gb', command.goto_buffer, {desc = 'Goto Buffer'})
 
 -- View

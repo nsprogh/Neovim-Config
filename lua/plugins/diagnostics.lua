@@ -18,11 +18,6 @@ return {
         {'<leader>kE', toggle_all, desc = 'All Errors'}
     },
     opts = {
-        icons = true,
-        -- icon used for open folds
-        --fold_open = 'v',
-        -- icon used for closed folds
-        --fold_closed = '>',
         -- add an indent guide below the fold icons
         indent_lines = false,
         signs = {
