@@ -20,7 +20,6 @@ end
 return {
     'neovim/nvim-lspconfig', version = 'v1.*',
     name = 'lsp',
-    dependencies = {'completion'},
     keys = {
         {'<Leader>li', '<cmd>checkhealth lspconfig<cr>', {desc = 'LSP Info'}},
         {'<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'}}
@@ -60,9 +59,10 @@ return {
                         },
                         -- Make the server aware of Neovim runtime files
                         workspace = {
-                            checkThirdParty = true,
+                            checkThirdParty = false,
                             library = {
-                                vim.env.VIMRUNTIME
+                                vim.env.VIMRUNTIME,
+                                vim.fn.stdpath('data')..'/lazy',
                                 -- Depending on the usage, you might want to add additional paths here.
                                 -- "${3rd}/luv/library"
                                 -- "${3rd}/busted/library",
