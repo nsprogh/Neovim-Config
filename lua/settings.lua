@@ -42,7 +42,15 @@ vim.wo.colorcolumn='80'
 
 -- GUI Options
 if vim.g.neovide then
-    vim.o.guifont = "FantasqueSansM Nerd Font:h12"
-    vim.g.neovide_refresh_rate = 75
+    -- Font selection and size should be handled by config.toml instead
     vim.g.neovide_cursor_animation_length = 0
+
+    -- Copy
+    vim.keymap.set('v', '<C-S-c>', '"+y')
+    -- Paste normal/visual mode
+    vim.keymap.set({'n', 'v'}, '<C-S-v>', '"+P')
+    -- Paste command mode
+    vim.keymap.set('c', '<C-S-v>', '<C-R>+')
+    -- Paste insert mode
+    vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pa')
 end
