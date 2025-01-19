@@ -4,7 +4,7 @@ return {
         'tpope/vim-fugitive', tag = 'v3.7',
         cmd = {'Git'},
         keys = {
-            {'<leader>gg', ':Git ', desc = 'Start git command'},
+            {'<leader>GG', ':Git ', desc = 'Start git command'},
             {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
         }
     },
@@ -43,19 +43,21 @@ return {
     },
 
     -- Indent guides
-    {
-        'lukas-reineke/indent-blankline.nvim', version = 'v3.*',
-        main = 'ibl',
-        ---@module 'ibl'
-        ---@type ibl.config
-        opts = {
-            indent = { char = '│' },
-            scope = {
-                show_start = false,
-                show_end = false
-            }
-        }
-    },
+    --
+    -- Superceded by snacks.indent
+    --{
+    --    'lukas-reineke/indent-blankline.nvim', version = 'v3.*',
+    --    main = 'ibl',
+    --    ---@module 'ibl'
+    --    ---@type ibl.config
+    --    opts = {
+    --        indent = { char = '│' },
+    --        scope = {
+    --            show_start = false,
+    --            show_end = false
+    --        }
+    --    }
+    --},
 
     -- <C-A>/<C-X> increment decrement
     -- {

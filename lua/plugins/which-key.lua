@@ -39,7 +39,9 @@ return {
             {'<leader>l', group = 'LSP'},
             {'<leader>t', group = 'Terminal'},
             {'<leader>m', group = 'Miscellaneous'},
-            {'<leader>r', group = 'Remote Session'}
+            {'<leader>r', group = 'Remote Session'},
+            {'<leader>g', group = 'Goto'},
+            {'<leader>G', group = 'Git'}
         })
     end
 }
