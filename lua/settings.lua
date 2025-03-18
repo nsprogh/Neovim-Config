@@ -42,8 +42,13 @@ vim.wo.colorcolumn='80'
 
 -- GUI Options
 if vim.g.neovide then
+    vim.g.neovide_text_gamma = 0.8
+    vim.g.neovide_text_contrast = 0.1
+
     -- Font selection and size should be handled by config.toml instead
     vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_transparency = 1
+    vim.g.neovide_normal_opacity = 1
 
     -- Copy
     vim.keymap.set('v', '<C-S-c>', '"+y')

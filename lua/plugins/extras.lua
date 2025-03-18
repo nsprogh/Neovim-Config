@@ -66,19 +66,6 @@ return {
     --    }
     --},
 
-    -- <C-A>/<C-X> increment decrement
-    -- {
-    --     'nat-418/boole.nvim',
-    --     config = function ()
-    --         require'boole'.setup {
-    --             mappings = {
-    --                 increment = '<C-a>',
-    --                 decrement = '<C-x>'
-    --             }
-    --         }
-    --     end
-    -- },
-
     'norcalli/nvim-colorizer.lua',
 
     -- Plugin below this one is just better

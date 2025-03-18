@@ -31,7 +31,7 @@ require('lazy').setup({
     checker = { enabled = false },
     change_detection = { enabled = false },
     dev = {
-        path = "~/Documents/projects/nvim-plugins",
+        path = "~/Source/projects/nvim-plugins",
         patterns = {'nsprogh'},
         fallback = false
     },

@@ -96,4 +96,36 @@ function command.quickfix ()
     })
 end
 
+-- TODO Figure out how to switch the path better since `.spec.ts` doesn't quite
+-- expand correctly and can cause issues when trying to switch to the other
+-- corresponding files from the unit test file
+function command.angular_goto_component ()
+    local target = vim.fn.expand("%:r")..'.ts'
+
+    vim.cmd('edit '..target)
+end
+
+function command.angular_goto_template ()
+    local target = vim.fn.expand("%:r")..'.html'
+
+    vim.cmd('edit '..target)
+end
+
+function command.angular_goto_style ()
+    local base = vim.fn.expand('%:r')
+
+    local target = base..'.css'
+    if vim.fn.filereadable(target) == 0 then
+        target = base..'.scss'
+    end
+
+    vim.cmd('edit '..target)
+end
+
+function command.angular_goto_spec ()
+    local target = vim.fn.expand("%:r")..'.spec.ts'
+
+    vim.cmd('edit '..target)
+end
+
 return command

@@ -51,6 +51,12 @@ vim.keymap.set('n', ']E', command.next_error_global, {desc = 'Goto Next Error Al
 ---- ToggleTerm ----
 --vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
 
+-- TODO use ft local buffer maps
+vim.keymap.set('n', '<leader>gc', command.angular_goto_component, {desc = 'Goto Angular component'})
+vim.keymap.set('n', '<leader>gt', command.angular_goto_template, {desc = 'Goto Angular template'})
+vim.keymap.set('n', '<leader>gs', command.angular_goto_style, {desc = 'Goto Angular style'})
+vim.keymap.set('n', '<leader>gu', command.angular_goto_spec, {desc = 'Goto Angular unit tests'})
+
 ---- Convenience ----
 -- Swap between current and previous buffer
 vim.keymap.set('n', '<BS>', '<C-^>', {desc = 'Swap current and previous buffer'})
