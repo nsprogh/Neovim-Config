@@ -8,6 +8,11 @@ return {
     dependencies = {'nvim-tree/nvim-web-devicons'},
     opts = {
         sync_root_with_cwd = true,
+        actions = {
+            open_file = {
+                quit_on_open = true
+            }
+        },
         view = {
             width = vim.g.sidebarwidth
         },
