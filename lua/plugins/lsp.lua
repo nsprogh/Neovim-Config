@@ -21,8 +21,8 @@ return {
     'neovim/nvim-lspconfig', version = 'v1.*',
     name = 'lsp',
     keys = {
-        {'<Leader>li', '<cmd>checkhealth lspconfig<cr>', {desc = 'LSP Info'}},
-        {'<Leader>lf', '<cmd>LspRestart<cr>', {desc = 'Restart Language Server'}}
+        {'<Leader>li', function () vim.cmd.checkhealth('lspconfig') end, {desc = 'LSP Info'}},
+        {'<Leader>lf', function () vim.cmd.LspRestart() end, {desc = 'Restart Language Server'}}
     },
     -- Only enable for file types that the language server is actually
     -- enabled for

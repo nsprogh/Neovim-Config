@@ -59,7 +59,7 @@ return {
         },
 
         fuzzy = {
-            use_typo_resistance = false
+            max_typos = function (_) return 0 end
         }
     },
     -- allows extending the enabled_providers array elsewhere in your config

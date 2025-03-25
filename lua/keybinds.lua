@@ -23,7 +23,7 @@ vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {des
 
 -- LSP
 -- Where should this go if not in the "lsp" section
-vim.keymap.set('n', '<Leader>le', vim.diagnostic.open_float, {desc = 'Messages'})
+vim.keymap.set('n', '<Leader>le', function () vim.diagnostic.open_float() end, {desc = 'Messages'})
 --vim.keymap.set('n', '<Leader>lw', vim.lsp.buf.code_action, {desc = 'Code Actions'})
 --vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, {desc = 'Rename Symbol'})
 --vim.keymap.set('n', '<Leader>lq', command.quickfix, {desc = 'Quick Fix'})

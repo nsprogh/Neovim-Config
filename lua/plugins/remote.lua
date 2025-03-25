@@ -6,12 +6,12 @@ return {
         'nvim-telescope/telescope.nvim', -- For picking b/w different remote methods
     },
     keys = {
-        {'<leader>rs', vim.cmd.RemoteStart, desc = 'Start Remote Session'},
-        {'<leader>rc', vim.cmd.RemoteStop, desc = 'Cancel Remote Session'},
-        {'<leader>ri', vim.cmd.RemoteInfo, desc = 'Info'},
-        {'<leader>rd', vim.cmd.RemoteConfigDel, desc = 'Delete Remote Config'},
-        {'<leader>rD', vim.cmd.RemoteCleanup, desc = 'Cleanup Remote'},
-        {'<leader>rl', vim.cmd.RemoteLog, desc = 'Remote Logs'}
+        {'<leader>rs', function () vim.cmd.RemoteStart() end, desc = 'Start Remote Session'},
+        {'<leader>rc', function () vim.cmd.RemoteStop() end, desc = 'Cancel Remote Session'},
+        {'<leader>ri', function () vim.cmd.RemoteInfo() end, desc = 'Info'},
+        {'<leader>rd', function () vim.cmd.RemoteConfigDel() end, desc = 'Delete Remote Config'},
+        {'<leader>rD', function () vim.cmd.RemoteCleanup() end, desc = 'Cleanup Remote'},
+        {'<leader>rl', function () vim.cmd.RemoteLog() end, desc = 'Remote Logs'}
     },
     opts = {
         client_callback = function (port, workspace_config)

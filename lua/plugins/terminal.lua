@@ -1,8 +1,8 @@
-function toggle()
+local function toggle()
     require('toggleterm').toggle(vim.v.count)
 end
 
-function toggle_all()
+local function toggle_all()
     require('toggleterm').toggle_all()
 end
 

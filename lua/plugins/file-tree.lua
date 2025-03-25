@@ -1,8 +1,8 @@
 return {
     'kyazdani42/nvim-tree.lua', version = 'v1.*',
     keys = {
-        {'<leader>kn', vim.cmd.NvimTreeToggle, desc = 'File Tree'},
-        {'<leader>km', vim.cmd.NvimTreeFindFile, desc = 'Show Current Buffer in File Tree'}
+        {'<leader>kn', function () vim.cmd.NvimTreeToggle() end, desc = 'File Tree'},
+        {'<leader>km', function () vim.cmd.NvimTreeFindFile() end, desc = 'Show Current Buffer in File Tree'}
     },
     -- Uncomment to use icons on status line
     dependencies = {'nvim-tree/nvim-web-devicons'},
