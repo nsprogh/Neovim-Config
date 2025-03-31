@@ -24,6 +24,12 @@ vim.o.undofile = true
 -- vim.o.termguicolors = true
 --vim.o.cmdheight = 0
 
+-- Folds
+vim.o.foldenable = true
+vim.o.foldtext = ''
+vim.o.foldcolumn = '0'
+vim.wo.foldminlines = 5
+
 -- Title
 vim.o.title = true
 vim.o.titlelen = 0

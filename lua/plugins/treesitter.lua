@@ -7,6 +7,8 @@ local filetypes = {
     'bash',
     'c',
     'typescript',
+    'javascript',
+    'css',
     'html',
     'rust',
     'php',
@@ -79,13 +81,14 @@ return {
 
         local groupid = vim.api.nvim_create_augroup('treesitter', { clear = true })
 
-        -- TODO setup tweaks for typescript
         vim.api.nvim_create_autocmd('FileType', {
             pattern = {'typescript', 'json'},
             group = groupid,
             callback = function (args)
-                vim.wo.foldmethod = 'expr'
-                vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                local window = vim.api.nvim_get_current_win()
+
+                vim.wo[window][0].foldmethod = 'expr'
+                vim.wo[window][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
             end
         })
 

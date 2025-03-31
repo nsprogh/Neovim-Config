@@ -139,5 +139,20 @@ return {
                 vim.keymap.set('n', 'gr', lsp_references, {desc = 'Goto References', buffer = event.buf})
             end
         })
+
+        -- Useful when I figure out how to set default folds better
+        --vim.api.nvim_create_autocmd('LspAttach', {
+        --    group = groupid,
+        --    desc = 'LSP-specific capabilities/settings',
+        --    callback = function (event)
+        --        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        --        if client and client:supports_method('textDocument/foldingRange') then
+        --            local window = vim.api.nvim_get_current_win()
+        --            vim.wo[window][0].foldmethod = 'expr'
+        --            vim.wo[window][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        --        end
+        --    end
+        --})
+        --vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
     end
 }

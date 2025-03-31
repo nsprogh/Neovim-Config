@@ -29,7 +29,9 @@ local function search_man_pages()
 end
 
 local function search_help()
-    require('telescope.builtin').help_tags()
+    require('telescope.builtin').help_tags({
+        layout_strategy = 'vertical'
+    })
 end
 
 local function project_open()
@@ -114,8 +116,8 @@ return {
                 },
                 project = {
                     base_dirs = {
-                        {'~/Documents/projects', max_depth = 2},
-                        {'~/Source/projects', max_depth = 2}
+                        {'~/Source/projects', max_depth = 3},
+                        {'~/Documents/projects', max_depth = 3}
                     }
                 }
             }

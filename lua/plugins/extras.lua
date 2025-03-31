@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
     -- Git client
     {
@@ -13,6 +14,16 @@ return {
             --{'<leader>GY', function () vim.cmd.Git('push -u origin '..'test') end,
             --    desc = 'Git push (set upstream)'},
             {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
+        }
+    },
+
+    -- Add GitHub support to fugitive
+    {
+        'https://github.com/tpope/vim-rhubarb',
+        dependencies = {'tpope/vim-fugitive'},
+        cmd = {'GBrowse'},
+        keys = {
+            {'<leader>GB', function () vim.cmd.GBrowse() end, desc = 'Git Browse'}
         }
     },
 

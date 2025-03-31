@@ -42,11 +42,10 @@ return {
     name = 'colorscheme',
     lazy = false,
     priority = 1000,
-    config = function ()
-        require('kanagawa').setup({
-            theme = 'dragon'
-        })
-        
-        vim.cmd('colorscheme kanagawa-dragon')
+    opts = {},
+    config = function (_, options)
+        require('kanagawa').setup(options)
+
+        vim.cmd('colorscheme kanagawa')
     end
 }

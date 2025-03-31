@@ -100,13 +100,13 @@ end
 -- expand correctly and can cause issues when trying to switch to the other
 -- corresponding files from the unit test file
 function command.angular_goto_component ()
-    local target = vim.fn.expand("%:r")..'.ts'
+    local target = vim.fn.expand('%:r')..'.ts'
 
     vim.cmd('edit '..target)
 end
 
 function command.angular_goto_template ()
-    local target = vim.fn.expand("%:r")..'.html'
+    local target = vim.fn.expand('%:r')..'.html'
 
     vim.cmd('edit '..target)
 end
@@ -123,7 +123,7 @@ function command.angular_goto_style ()
 end
 
 function command.angular_goto_spec ()
-    local target = vim.fn.expand("%:r")..'.spec.ts'
+    local target = vim.fn.expand('%:r')..'.spec.ts'
 
     vim.cmd('edit '..target)
 end

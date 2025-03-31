@@ -1,6 +1,6 @@
 return {
     -- use a release tag to download pre-built binaries
-    'saghen/blink.cmp', version = 'v0.*',
+    'saghen/blink.cmp', version = 'v1.*',
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -13,25 +13,28 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-        enabled = function ()
-            return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
-        end,
+        -- Not sure what this is for but maybe it's not needed anymore?
+        --enabled = function ()
+        --    return vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
+        --end,
 
-        -- 'default' for mappings similar to built-in completion
-        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-        -- see the "default configuration" section below for full documentation on how to define
-        -- your own keymap.
-        keymap = { preset = 'super-tab' },
+        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+        -- 'super-tab' for mappings similar to vscode (tab to accept)
+        -- 'enter' for enter to accept
+        -- 'none' for no mappings
+        --
+        -- All presets have the following mappings:
+        -- C-space: Open menu or open docs if already open
+        -- C-n/C-p or Up/Down: Select next/previous item
+        -- C-e: Hide menu
+        -- C-k: Toggle signature help (if signature.enabled = true)
+        --
+        -- See :h blink-cmp-config-keymap for defining your own keymap
+        keymap = { preset = 'default' },
 
         appearance = {
-            -- sets the fallback highlight groups to nvim-cmp's highlight groups
-            -- useful for when your theme doesn't support blink.cmp
-            -- will be removed in a future release, assuming themes add support
-            use_nvim_cmp_as_default = true,
-
-            -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- adjusts spacing to ensure icons are aligned
+            -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+            -- Adjusts spacing to ensure icons are aligned
             nerd_font_variant = 'mono'
         },
 
@@ -40,17 +43,10 @@ return {
 
         completion = {
             accept = {
-                -- experimental auto-brackets support
-                auto_brackets = {
-                    enabled = true
-                }
+                auto_brackets = { enabled = true }
             },
             trigger = {
-                show_on_insert_on_trigger_character = false,
-
-                -- For use with the 'super-tab' keymaps so that hitting tab to
-                -- go to the next entry in the snippet doesn't proc completion
-                show_in_snippet = false
+                show_on_insert_on_trigger_character = false
             },
             documentation = {
                 auto_show = true,
@@ -58,11 +54,33 @@ return {
             }
         },
 
+        -- Default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, due to `opts_extend`
+        sources = {
+            default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
+        cmdline = {
+            enabled = false
+        },
+
+        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+        --
+        -- See the fuzzy documentation for more information
         fuzzy = {
-            max_typos = function (_) return 0 end
+            implementation = "prefer_rust_with_warning",
+            -- Typo correction may no longer be needed with exact matches being
+            -- prioritized
+            --max_typos = function (_) return 0 end,
+            -- Always prioritize exact matches
+            sorts = {
+                'exact',
+                -- defaults
+                'score',
+                'sort_text',
+            }
         }
     },
-    -- allows extending the enabled_providers array elsewhere in your config
-    -- without having to redefining it
-    opts_extend = { "sources.completion.enabled_providers" }
+    opts_extend = { "sources.default" }
 }
