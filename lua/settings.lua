@@ -23,6 +23,7 @@ vim.o.undofile = true
 -- vim.o.background = 'dark'
 -- vim.o.termguicolors = true
 --vim.o.cmdheight = 0
+vim.o.showmode = false
 
 -- Folds
 vim.o.foldenable = true
