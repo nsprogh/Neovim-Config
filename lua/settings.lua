@@ -60,3 +60,20 @@ if vim.g.neovide then
     -- Paste insert mode
     vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pa')
 end
+
+-- Diagnostic Settings
+-- Currently set to show virtual lines for errors, and virtual text for warn
+vim.diagnostic.config({
+    virtual_text = {
+        enabled = true,
+        severity = {
+            max = vim.diagnostic.severity.WARN
+        }
+    },
+    virtual_lines = {
+        enabled = true,
+        severity = {
+            min = vim.diagnostic.severity.ERROR
+        }
+    }
+})
