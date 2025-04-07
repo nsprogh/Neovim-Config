@@ -41,7 +41,8 @@ return {
             {'<leader>m', group = 'Miscellaneous'},
             {'<leader>r', group = 'Remote Session'},
             {'<leader>g', group = 'Goto'},
-            {'<leader>G', group = 'Git'}
+            {'<leader>G', group = 'Git'},
+            {'<leader>o', group = 'Tasks'}
         })
     end
 }

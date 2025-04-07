@@ -22,6 +22,7 @@ return {
                 }
             },
             lualine_x = {
+                'overseer',
                 {'encoding', icons_enabled = false},
                 {'fileformat', icons_enabled = false},
                 {'filetype', icons_enabled = false},
