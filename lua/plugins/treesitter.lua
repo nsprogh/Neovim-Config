@@ -48,7 +48,7 @@ return {
     dependencies = {
         {
             -- Treesitter equivalent to context.vim
-            'nvim-treesitter/nvim-treesitter-context',
+            'nvim-treesitter/nvim-treesitter-context', branch = 'master',
             opts = {
                 enable = true,
                 max_lines = 5
