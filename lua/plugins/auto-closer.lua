@@ -9,7 +9,6 @@
 -- vim-closer.
 return {
     'windwp/nvim-autopairs',
-    dependencies = {'completion'},
     event = 'InsertEnter',
     opts = {
         check_ts = false

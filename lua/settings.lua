@@ -62,6 +62,9 @@ if vim.g.neovide then
     vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pa')
 end
 
+vim.o.completeopt = 'menu,menuone,noselect,popup,fuzzy'
+vim.o.pumwidth = 35
+
 -- Diagnostic Settings
 -- Currently set to show virtual lines for errors, and virtual text for warn
 vim.diagnostic.config({
