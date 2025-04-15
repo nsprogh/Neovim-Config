@@ -17,8 +17,7 @@ end
 local function search_man_pages()
     local selected_sections
     if vim.v.count > 0 then
-        local count_string = tostring(vim.v.count)
-        selected_sections = {count_string}
+        selected_sections = {tostring(vim.v.count)}
     else
         selected_sections = {'ALL'}
     end

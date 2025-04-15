@@ -14,7 +14,6 @@ return {
         },
         plugins = {
             presets = {
-                g = false,
                 operators = false,
                 motions = false,
                 windows = false,

@@ -95,5 +95,11 @@ return {
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {},
-    }
+    },
+
+    -- Seems to have some weird issues
+    -- {
+    --     'xb-bx/editable-term.nvim',
+    --     config = true
+    -- }
 }

@@ -73,6 +73,7 @@ vim.diagnostic.config({
     },
     virtual_lines = {
         enabled = true,
+        current_line = true,
         severity = {
             min = vim.diagnostic.severity.ERROR
         }

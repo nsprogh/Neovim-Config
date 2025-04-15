@@ -23,6 +23,7 @@ vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {des
 
 -- LSP
 -- Where should this go if not in the "lsp" section
+-- See also CTRL-W d
 vim.keymap.set('n', '<Leader>le', function () vim.diagnostic.open_float() end, {desc = 'Messages'})
 --vim.keymap.set('n', '<Leader>lw', vim.lsp.buf.code_action, {desc = 'Code Actions'})
 --vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, {desc = 'Rename Symbol'})
@@ -70,6 +71,8 @@ vim.keymap.set('n', 'yc', 'yygccp', {remap = true, desc = 'Duplicate a line and 
 vim.keymap.set('n', 'vy', '`[v`]', {desc = 'Select recently pasted/yanked/changed text'})
 -- Conflicts with <C-I>
 --vim.keymap.set('n', '<tab>', 'za', {desc = 'Toggle fold under cursor'})
+vim.keymap.set('n', '<leader>kn', '<cmd>edit .<cr>', {desc = 'Netrw'})
+vim.keymap.set('n', '<leader>km', '<cmd>edit %:h<cr>', {desc = 'Netrw current buffer'})
 
 -- Terminal
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
