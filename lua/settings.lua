@@ -49,7 +49,7 @@ if vim.g.neovide then
 
     -- Font selection and size should be handled by config.toml instead
     vim.g.neovide_cursor_animation_length = 0
-    vim.g.neovide_transparency = 1
+    vim.g.neovide_opacity = 1
     vim.g.neovide_normal_opacity = 1
 
     -- Copy
