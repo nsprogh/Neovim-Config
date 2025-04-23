@@ -274,20 +274,32 @@ return {
                     return
                 end
 
-                if client:supports_method(vim.lsp.protocol.Methods.textDocument_hover) then
-                    local hovergroup = vim.api.nvim_create_augroup('lsp-hover', { clear = true })
+                if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+                    local highlightgroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
                     vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
-                        group = hovergroup,
+                        group = highlightgroup,
                         buffer = event.buf,
                         callback = function ()
                             vim.lsp.buf.document_highlight()
                         end
                     })
                     vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
-                        group = hovergroup,
+                        group = highlightgroup,
                         buffer = event.buf,
                         callback = function ()
                             vim.lsp.buf.clear_references()
+                        end
+                    })
+
+                    vim.api.nvim_create_autocmd('LspDetach', {
+                        group = highlightgroup,
+                        buffer = event.buf,
+                        callback = function ()
+                            vim.lsp.buf.clear_references()
+                            vim.api.nvim_clear_autocmds({
+                                group = highlightgroup,
+                                buffer = event.buf
+                            })
                         end
                     })
                 end
