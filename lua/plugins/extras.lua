@@ -19,7 +19,7 @@ return {
 
     -- Add GitHub support to fugitive
     {
-        'https://github.com/tpope/vim-rhubarb',
+        'https://github.com/tpope/vim-rhubarb', branch = 'master',
         dependencies = {'tpope/vim-fugitive'},
         cmd = {'GBrowse'},
         keys = {
@@ -60,32 +60,8 @@ return {
         end
     },
 
-    -- Indent guides
-    --
-    -- Superceded by snacks.indent
-    --{
-    --    'lukas-reineke/indent-blankline.nvim', version = 'v3.*',
-    --    main = 'ibl',
-    --    ---@module 'ibl'
-    --    ---@type ibl.config
-    --    opts = {
-    --        indent = { char = '│' },
-    --        scope = {
-    --            show_start = false,
-    --            show_end = false
-    --        }
-    --    }
-    --},
-
     'norcalli/nvim-colorizer.lua',
 
-    -- Plugin below this one is just better
-    --{
-    --    'lukas-reineke/headlines.nvim',
-    --    dependencies = 'treesitter',
-    --    ft = {'markdown'},
-    --    config = true
-    --},
     {
         'MeanderingProgrammer/render-markdown.nvim', version = 'v7.*',
         -- dependencies = { 'treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite

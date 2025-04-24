@@ -32,7 +32,7 @@ local function toggle()
 end
 
 return {
-    'liuchengxu/vista.vim',
+    'liuchengxu/vista.vim', branch = 'master',
     name = 'tagbar',
     keys = {
         {'<Leader>kj', toggle, desc = 'Tags (LSP)'}

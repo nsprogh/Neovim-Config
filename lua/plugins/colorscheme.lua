@@ -38,7 +38,7 @@
 -- }
 
 return {
-    'rebelot/kanagawa.nvim',
+    'rebelot/kanagawa.nvim', branch = 'master',
     name = 'colorscheme',
     lazy = false,
     priority = 1000,

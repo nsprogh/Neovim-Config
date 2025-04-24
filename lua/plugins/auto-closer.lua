@@ -8,7 +8,7 @@
 -- This works but is ever so slightly perceptible slow compared to
 -- vim-closer.
 return {
-    'windwp/nvim-autopairs',
+    'windwp/nvim-autopairs', branch = 'master',
     event = 'InsertEnter',
     opts = {
         check_ts = false

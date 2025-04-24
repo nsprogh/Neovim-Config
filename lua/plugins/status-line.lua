@@ -1,7 +1,7 @@
 -- Configuration for a status line
 
 return {
-    'hoob3rt/lualine.nvim',
+    'hoob3rt/lualine.nvim', branch = 'master',
     -- Uncomment to use icons on status line
     dependencies = {'nvim-tree/nvim-web-devicons'},
     lazy = false,
@@ -22,7 +22,6 @@ return {
                 }
             },
             lualine_x = {
-                'overseer',
                 {'encoding', icons_enabled = false},
                 {'fileformat', icons_enabled = false},
                 {'filetype', icons_enabled = false},

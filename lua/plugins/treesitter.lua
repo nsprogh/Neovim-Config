@@ -42,7 +42,7 @@ for ft, parser in pairs(filetypes) do
 end
 
 return {
-    'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter', branch = 'master',
     name = 'treesitter',
     build = ':TSUpdate',
     dependencies = {
