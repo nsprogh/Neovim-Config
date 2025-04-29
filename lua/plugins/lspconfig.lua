@@ -219,7 +219,8 @@ return {
             'texlab',
             -- 'ccls',
             'rust_analyzer',
-            'lua_ls'
+            'lua_ls',
+            'yamlls'
         })
 
         vim.lsp.config('psalm', {
