@@ -67,7 +67,7 @@ return {
         -- dependencies = { 'treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         -- dependencies = { 'treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
         dependencies = { 'treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        ft = 'markdown',
+        ft = {'markdown', 'Avante'},
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {},
