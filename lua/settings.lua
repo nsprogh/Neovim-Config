@@ -62,7 +62,7 @@ if vim.g.neovide then
     vim.keymap.set('i', '<C-S-v>', '<ESC>l"+Pa')
 end
 
-vim.o.completeopt = 'menu,menuone,noselect,popup,fuzzy'
+vim.o.completeopt = 'menu,menuone,noinsert,popup,fuzzy'
 vim.o.pumwidth = 35
 
 -- Diagnostic Settings
