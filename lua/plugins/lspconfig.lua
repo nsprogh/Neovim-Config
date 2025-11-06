@@ -264,51 +264,8 @@ return {
 
         --------------------- AUTOCMDS ----------------------------------------
 
-        local groupid = vim.api.nvim_create_augroup('lsp', { clear = true })
-
         vim.api.nvim_create_autocmd('LspAttach', {
-            group = groupid,
-            desc = 'LSP Extras',
-            callback = function (event)
-                local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if not client then
-                    return
-                end
-
-                if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-                    local highlightgroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = true })
-                    vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
-                        group = highlightgroup,
-                        buffer = event.buf,
-                        callback = function ()
-                            vim.lsp.buf.document_highlight()
-                        end
-                    })
-                    vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
-                        group = highlightgroup,
-                        buffer = event.buf,
-                        callback = function ()
-                            vim.lsp.buf.clear_references()
-                        end
-                    })
-
-                    vim.api.nvim_create_autocmd('LspDetach', {
-                        group = highlightgroup,
-                        buffer = event.buf,
-                        callback = function ()
-                            vim.lsp.buf.clear_references()
-                            vim.api.nvim_clear_autocmds({
-                                group = highlightgroup,
-                                buffer = event.buf
-                            })
-                        end
-                    })
-                end
-            end
-        })
-
-        vim.api.nvim_create_autocmd('LspAttach', {
-            group = groupid,
+            group = vim.api.nvim_create_augroup('lsp', { clear = true }),
             desc = 'LSP Autocompletion',
             callback = function (event)
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -330,42 +287,5 @@ return {
             end
         })
 
-        vim.api.nvim_create_autocmd('LspAttach', {
-            group = groupid,
-            desc = 'LSP Buffer-local keymaps',
-            callback = function (event)
-                local options = {buffer = event.buf}
-
-                vim.keymap.set({'n', 'x'}, 'gQ',
-                    function () vim.lsp.buf.format({ async = true }) end,
-                    {buffer = event.buf, desc = 'Format entire buffer with LSP'})
-            end
-        })
-
-        -- To enable inlay hints
-        --vim.api.nvim_create_autocmd('LspAttach', {
-        --    group = groupid,
-        --    callback = function (args)
-        --        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        --        if client.server_capabilities.inlayHintProvider then
-        --            vim.lsp.inlay_hint.enable(args.buf, true)
-        --        end
-        --    end
-        --})
-
-        -- Useful when I figure out how to set default folds better
-        --vim.api.nvim_create_autocmd('LspAttach', {
-        --    group = groupid,
-        --    desc = 'LSP-specific capabilities/settings',
-        --    callback = function (event)
-        --        local client = vim.lsp.get_client_by_id(event.data.client_id)
-        --        if client and client:supports_method('textDocument/foldingRange') then
-        --            local window = vim.api.nvim_get_current_win()
-        --            vim.wo[window][0].foldmethod = 'expr'
-        --            vim.wo[window][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-        --        end
-        --    end
-        --})
-        --vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
     end
 }

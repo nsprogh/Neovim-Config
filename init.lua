@@ -1,4 +1,5 @@
 require 'settings'
+require 'filetypes'
 require 'packagemanager'
 require 'autocommands'
 require 'keybinds'

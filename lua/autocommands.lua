@@ -1,45 +1,170 @@
-local groupid = vim.api.nvim_create_augroup('user', { clear = true })
+vim.api.nvim_create_augroup('filetype-override', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+    desc = 'Override styles for yaml-specific quirks',
+    pattern = 'yaml',
+    group = 'filetype-override',
+    callback = function (context)
+        vim.api.nvim_buf_set_var(context.buf, 'tabstop', 2)
+        vim.api.nvim_buf_set_var(context.buf, 'softtabstop', 2)
+        vim.api.nvim_buf_set_var(context.buf, 'shiftwidth', 2)
+        vim.api.nvim_buf_set_var(context.buf, 'expandtab', true)
+    end
+})
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'yaml',
-    group = groupid,
-    callback = function (args)
-        vim.bo[args.buf].tabstop = 2
-        vim.bo[args.buf].softtabstop = 2
-        vim.bo[args.buf].shiftwidth = 2
-        vim.bo[args.buf].expandtab = true
-    end
-})
-vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
-    pattern = '*.volt',
-    group = groupid,
-    callback = function (args)
-        vim.bo[args.buf].filetype = 'html'
-    end
+    desc = 'Open help window vertically',
+    group = 'filetype-override',
+    pattern = 'help',
+    -- TODO is there a lua native equivalent?
+    command = 'wincmd H'
 })
 
+--
+
+vim.api.nvim_create_augroup('user', { clear = true })
 
 -- For some reason, setting opt.mouse too early seems to have no effect
 vim.api.nvim_create_autocmd('VimEnter', {
+    desc = 'Deferred enable mouse mode',
+    group = 'user',
     callback = function ()
         vim.o.mouse = 'a'
     end
 })
 
--- A little too aggressive, almost perfect
---vim.api.nvim_create_autocmd('WinNew', {
---    pattern = '*',
---    group = groupid,
---    callback = function ()
---        vim.api.nvim_command('wincmd H')
---    end
---})
-
 -- If writing a file in a directory that doesn't exist yet, this will create
 -- the directory for you.
 vim.api.nvim_create_autocmd('BufWritePre', {
-    group = groupid,
+    desc = 'Create directory for buffer if it does not already exist',
+    group = 'user',
     callback = function (context)
         vim.fn.mkdir(vim.fn.fnamemodify(context.file, ':p:h'), 'p')
     end
 })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight yanked text',
+    group = 'user',
+    callback = function ()
+        vim.highlight.on_yank({ timeout = 200, visual = true })
+    end
+})
+
+vim.api.nvim_create_autocmd('VimResized', {
+    desc = 'Resize splits when terminal is resized',
+    group = 'user',
+    command = 'wincmd ='
+})
+
+--
+vim.api.nvim_create_augroup('active-cursorline', { clear = true })
+vim.api.nvim_create_autocmd('WinEnter', {
+    desc = 'Enable cursorline on active window',
+    group = 'active-cursorline',
+    callback = function ()
+        local windowid = vim.api.nvim_get_current_win()
+        vim.api.nvim_set_option_value('cursorline', true, {
+            scope = 'local',
+            win = windowid
+        })
+    end
+})
+
+vim.api.nvim_create_autocmd('WinLeave', {
+    desc = 'Disable cursorline on inactive window',
+    group = 'active-cursorline',
+    callback = function ()
+        local windowid = vim.api.nvim_get_current_win()
+        vim.api.nvim_set_option_value('cursorline', false, {
+            scope = 'local',
+            win = windowid
+        })
+    end
+})
+
+-- LSP ------------------------------------------------------------------------
+
+vim.api.nvim_create_augroup('lsp.extras', { clear = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP capability-based functions',
+    group = 'lsp.extras',
+    callback = function (event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if not client then
+            return
+        end
+
+        -- TODO setup more robust aggregate capability detection for buffers
+        -- with multiple clients attached
+
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+            vim.api.nvim_create_augroup('lsp.highlight', {})
+            vim.api.nvim_clear_autocmds({ group = 'lsp.highlight', buffer = event.buf })
+            vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
+                group = 'lsp.highlight',
+                buffer = event.buf,
+                callback = function ()
+                    vim.lsp.buf.document_highlight()
+                end
+            })
+            vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
+                group = 'lsp.highlight',
+                buffer = event.buf,
+                callback = function ()
+                    vim.lsp.buf.clear_references()
+                end
+            })
+            vim.api.nvim_create_autocmd('LspDetach', {
+                buffer = event.buf,
+                once = true,
+                callback = function ()
+                    vim.lsp.buf.clear_references()
+                    vim.api.nvim_clear_autocmds({
+                        group = 'lsp.highlight',
+                        buffer = event.buf
+                    })
+                end
+            })
+        end
+
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) then
+            vim.keymap.set({'n', 'x'}, 'gQ',
+                function () vim.lsp.buf.format({ async = true }) end,
+                {buffer = event.buf, desc = 'Format entire buffer with LSP'})
+
+            vim.api.nvim_create_autocmd('LspDetach', {
+                buffer = event.buf,
+                once = true,
+                callback = function ()
+                    vim.keymap.del({'n', 'x'}, 'gQ', { buffer = event.buf })
+                end
+            })
+        end
+    end
+})
+
+-- To enable inlay hints
+--vim.api.nvim_create_autocmd('LspAttach', {
+--    group = 'lsp.extras',
+--    callback = function (args)
+--        local client = vim.lsp.get_client_by_id(args.data.client_id)
+--        if client.server_capabilities.inlayHintProvider then
+--            vim.lsp.inlay_hint.enable(args.buf, true)
+--        end
+--    end
+--})
+
+-- Useful when I figure out how to set default folds better
+--vim.api.nvim_create_autocmd('LspAttach', {
+--    group = 'lsp.extras',
+--    desc = 'LSP-specific capabilities/settings',
+--    callback = function (event)
+--        local client = vim.lsp.get_client_by_id(event.data.client_id)
+--        if client and client:supports_method('textDocument/foldingRange') then
+--            local window = vim.api.nvim_get_current_win()
+--            vim.wo[window][0].foldmethod = 'expr'
+--            vim.wo[window][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+--        end
+--    end
+--})
+--vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
