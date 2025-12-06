@@ -6,8 +6,8 @@
 local filetypes = {
     'bash',
     'c',
-    'typescript',
-    'javascript',
+    typescript = {'typescript', 'jsdoc'},
+    javascript = {'javascript', 'jsdoc'},
     'css',
     'html',
     'rust',
@@ -20,6 +20,7 @@ local filetypes = {
     'vim',
     'vimdoc',
     'yaml',
+    'nu',
     markdown = {'markdown', 'markdown_inline'},
 }
 
