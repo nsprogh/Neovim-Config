@@ -56,6 +56,41 @@ vim.api.nvim_create_autocmd('VimResized', {
     command = 'wincmd ='
 })
 
+vim.api.nvim_create_autocmd('BufRead', {
+    desc = 'CD to nearest project root',
+    group = 'user',
+    callback = function (context)
+        local rootfiles = {
+            '.git/',
+            'Cargo.toml',
+            'package.json'
+        }
+
+        -- Ignore special buffers (those with buftype set)
+        local buftype = vim.api.nvim_get_option_value('buftype', {buf = context.buf})
+        if buftype ~= '' then
+            return
+        end
+
+        for _, target in ipairs(rootfiles) do
+            local path
+            if string.match(target, '/$') then
+                -- Is directory
+                path = vim.fn.finddir(target, '.;')
+            else
+                -- Is file
+                path = vim.fn.findfile(target, '.;')
+            end
+
+            if path ~= '' then
+                local root = string.sub(path, 1, -#target - 1)
+                vim.api.nvim_set_current_dir(root)
+                return
+            end
+        end
+    end
+})
+
 --
 vim.api.nvim_create_augroup('active-cursorline', { clear = true })
 vim.api.nvim_create_autocmd('WinEnter', {
