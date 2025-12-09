@@ -60,34 +60,38 @@ vim.api.nvim_create_autocmd('BufRead', {
     desc = 'CD to nearest project root',
     group = 'user',
     callback = function (context)
-        local rootfiles = {
-            '.git/',
-            'Cargo.toml',
-            'package.json'
-        }
-
         -- Ignore special buffers (those with buftype set)
         local buftype = vim.api.nvim_get_option_value('buftype', {buf = context.buf})
         if buftype ~= '' then
             return
         end
 
-        for _, target in ipairs(rootfiles) do
-            local path
-            if string.match(target, '/$') then
-                -- Is directory
-                path = vim.fn.finddir(target, '.;')
-            else
-                -- Is file
-                path = vim.fn.findfile(target, '.;')
-            end
+        local rootfiles = {
+            '.git',
+            'Cargo.toml',
+            -- Monorepos make this a questionable root marker
+            --'package.json'
+        }
 
-            if path ~= '' then
-                local root = string.sub(path, 1, -#target - 1)
-                vim.api.nvim_set_current_dir(root)
-                return
-            end
+        local currentfile = vim.api.nvim_buf_get_name(context.buf)
+        if currentfile == '' then
+            return
         end
+
+        local start = vim.fs.dirname(currentfile)
+        local matches = vim.fs.find(rootfiles, {
+            path = start,
+            upward = true,
+            stop = os.getenv('HOME'),
+            limit = 1
+        })
+
+        if #matches == 0 then
+            return
+        end
+
+        local newroot = vim.fs.dirname(matches[1])
+        vim.api.nvim_set_current_dir(newroot)
     end
 })
 
