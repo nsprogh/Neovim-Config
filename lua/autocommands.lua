@@ -19,6 +19,37 @@ vim.api.nvim_create_autocmd('FileType', {
     command = 'wincmd H'
 })
 
+vim.api.nvim_create_autocmd('BufNew', {
+    desc = 'Angular local keybinds',
+    -- TODO I feel like a FileType autocmd would be more correct but probably
+    -- needs a plugin for better angular FT support
+    pattern = {
+        '*.component.html',
+        '*.component.ts',
+        '*.component.spec.ts',
+        '*.component.scss'
+    },
+    group = 'filetype-override',
+    callback = function (context)
+        vim.keymap.set('n', '<localleader>gc',
+                       require('commands').angular_goto_component,
+                       {desc = 'Goto Angular component',
+                        buffer = context.buf})
+        vim.keymap.set('n', '<localleader>gt',
+                       require('commands').angular_goto_template,
+                       {desc = 'Goto Angular template',
+                        buffer = context.buf})
+        vim.keymap.set('n', '<localleader>gs',
+                       require('commands').angular_goto_style,
+                       {desc = 'Goto Angular style',
+                        buffer = context.buf})
+        vim.keymap.set('n', '<localleader>gu',
+                       require('commands').angular_goto_spec,
+                       {desc = 'Goto Angular unit tests',
+                        buffer = context.buf})
+    end
+})
+
 --
 
 vim.api.nvim_create_augroup('user', { clear = true })

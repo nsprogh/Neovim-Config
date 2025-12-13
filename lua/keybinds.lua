@@ -24,7 +24,7 @@ vim.keymap.set('n', '<Leader>cc', '<cmd>nohlsearch<cr><bar><cmd>echon<cr>', {des
 -- LSP
 -- Where should this go if not in the "lsp" section
 -- See also CTRL-W d
-vim.keymap.set('n', '<Leader>le', function () vim.diagnostic.open_float() end, {desc = 'Messages'})
+-- vim.keymap.set('n', '<Leader>le', function () vim.diagnostic.open_float() end, {desc = 'Messages'})
 --vim.keymap.set('n', '<Leader>lw', vim.lsp.buf.code_action, {desc = 'Code Actions'})
 --vim.keymap.set('n', '<Leader>lr', vim.lsp.buf.rename, {desc = 'Rename Symbol'})
 --vim.keymap.set('n', '<Leader>lq', command.quickfix, {desc = 'Quick Fix'})
@@ -53,10 +53,10 @@ vim.keymap.set('n', ']E', command.next_error_global, {desc = 'Goto Next Error Al
 --vim.keymap.set({'n', 'i', 't'}, [[<A-\>]], command.toggle_all_terminals)
 
 -- TODO use ft local buffer maps
-vim.keymap.set('n', '<leader>gc', command.angular_goto_component, {desc = 'Goto Angular component'})
-vim.keymap.set('n', '<leader>gt', command.angular_goto_template, {desc = 'Goto Angular template'})
-vim.keymap.set('n', '<leader>gs', command.angular_goto_style, {desc = 'Goto Angular style'})
-vim.keymap.set('n', '<leader>gu', command.angular_goto_spec, {desc = 'Goto Angular unit tests'})
+-- vim.keymap.set('n', '<leader>gc', command.angular_goto_component, {desc = 'Goto Angular component'})
+-- vim.keymap.set('n', '<leader>gt', command.angular_goto_template, {desc = 'Goto Angular template'})
+-- vim.keymap.set('n', '<leader>gs', command.angular_goto_style, {desc = 'Goto Angular style'})
+-- vim.keymap.set('n', '<leader>gu', command.angular_goto_spec, {desc = 'Goto Angular unit tests'})
 
 ---- Convenience ----
 -- Swap between current and previous buffer

@@ -21,7 +21,7 @@ local filetypes = {
     'vimdoc',
     'yaml',
     'nu',
-    markdown = {'markdown', 'markdown_inline'},
+    markdown = {'markdown', 'markdown_inline'}
 }
 
 local fts = {}

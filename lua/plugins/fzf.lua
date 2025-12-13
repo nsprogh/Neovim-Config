@@ -57,7 +57,9 @@ return {
         {'<leader>fb', function() require('fzf-lua').buffers() end,
             desc = '[b]uffers'},
         {'<leader>fr', function() require('fzf-lua').lsp_references() end,
-            desc = '[r]eferences (LSP)'}
+            desc = '[r]eferences (LSP)'},
+        {'<leader>fs', function() require('fzf-lua').lsp_document_symbols() end,
+            desc = 'document [s]ymbols (LSP)'}
     },
     ---@module "fzf-lua"
     ---@type fzf-lua.Config|{}

@@ -32,16 +32,15 @@ return {
     config = function (_, opts)
         require('which-key').setup(opts)
         require('which-key').add({
-            {'<leader>c', group = 'Clear'},
+            -- {'<leader>c', group = 'Clear'},
             {'<leader>f', group = 'Find'},
             {'<leader>k', group = 'Sidebar'},
-            {'<leader>l', group = 'LSP'},
-            {'<leader>t', group = 'Terminal'},
+            -- {'<leader>l', group = 'LSP'},
             {'<leader>m', group = 'Miscellaneous'},
             {'<leader>r', group = 'Remote Session'},
-            {'<leader>g', group = 'Goto'},
-            {'<leader>G', group = 'Git'},
-            {'<leader>o', group = 'Tasks'}
+            -- {'<leader>g', group = 'Goto'},
+            {'<leader>G', group = 'Git/Hub'},
+            {'<leader>T', group = 'Tasks'}
         })
     end
 }

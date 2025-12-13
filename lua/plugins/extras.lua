@@ -5,14 +5,6 @@ return {
         'tpope/vim-fugitive', tag = 'v3.7',
         cmd = {'Git'},
         keys = {
-            {'<leader>GG', ':Git ', desc = 'Start git command'},
-            {'<leader>GP', function () vim.cmd.Git('pull') end,
-                desc = 'Git pull'},
-            {'<leader>GU', function () vim.cmd.Git('push') end,
-                desc = 'Git push'},
-            -- TODO get current branch name
-            --{'<leader>GY', function () vim.cmd.Git('push -u origin '..'test') end,
-            --    desc = 'Git push (set upstream)'},
             {'<leader>ko', '<cmd>tab Git<cr>', desc = 'Git'}
         }
     },
@@ -23,7 +15,7 @@ return {
         dependencies = {'tpope/vim-fugitive'},
         cmd = {'GBrowse'},
         keys = {
-            {'<leader>GB', function () vim.cmd.GBrowse() end, desc = 'Git Browse'}
+            {'<leader>GB', function () vim.cmd.GBrowse() end, desc = '[G]it [B]rowse'}
         }
     },
 

@@ -18,8 +18,7 @@ return {
     name = 'terminal',
     keys = {
         {'<C-\\>', toggle, mode = {'n', 'i', 't'}},
-        {'<A-\\>', toggle_all, mode = {'n', 'i', 't'}},
-        {'<leader>ta', toggle_all, desc = 'Show/Hide Terminals'}
+        {'<A-\\>', toggle_all, mode = {'n', 'i', 't'}}
     },
     opts = {
         -- size = 80,
