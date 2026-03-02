@@ -3,7 +3,8 @@ local function files()
         find_opts = [[-path '*/.*' -prune -o -type f -print]],
         rg_opts   = [[--color=never --files]],
         fd_opts   = [[--color=never --type f --type l --exclude .git]],
-        hidden = false
+        hidden = false,
+        previewer = false
     })
 end
 
@@ -31,7 +32,10 @@ local function man_pages()
         selected_sections = {'ALL'}
     end
 
-    require('fzf-lua').man_pages({ sections = selected_sections })
+    require('fzf-lua').man_pages({
+        sections = selected_sections,
+        previewer = false
+    })
 end
 
 return {
