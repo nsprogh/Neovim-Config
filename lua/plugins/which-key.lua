@@ -1,46 +1,36 @@
-local function show()
-    require('which-key').show({ global = false })
-end
+vim.go.timeout = true
+vim.go.timeoutlen = 500
 
-return {
-    'folke/which-key.nvim', version = 'v3.*',
-    event = 'VeryLazy',
-    keys = {
-        {'<Leader>?', show, desc = 'Buffer Local Keymaps (which-key)'}
+vim.pack.add({
+    { src = 'https://github.com/folke/which-key.nvim',
+      version = vim.version.range('v3.*') }
+})
+
+require('which-key').setup({
+    icons = {
+        mappings = false
     },
-    opts = {
-        icons = {
-            mappings = false
+    plugins = {
+        presets = {
+            operators = false,
+            motions = false,
+            windows = false,
+            nav = false,
+            text_objects = true,
         },
-        plugins = {
-            presets = {
-                operators = false,
-                motions = false,
-                windows = false,
-                nav = false,
-                text_objects = true,
-            },
-            marks = false,
-            registers = false,
-            spelling = false
-        }
-    },
-    init = function ()
-        vim.go.timeout = true
-        vim.go.timeoutlen = 500
-    end,
-    config = function (_, opts)
-        require('which-key').setup(opts)
-        require('which-key').add({
-            -- {'<leader>c', group = 'Clear'},
-            {'<leader>f', group = 'Find'},
-            {'<leader>k', group = 'Sidebar'},
-            -- {'<leader>l', group = 'LSP'},
-            {'<leader>m', group = 'Miscellaneous'},
-            {'<leader>r', group = 'Remote Session'},
-            -- {'<leader>g', group = 'Goto'},
-            {'<leader>G', group = 'Git/Hub'},
-            {'<leader>T', group = 'Tasks'}
-        })
-    end
-}
+        marks = false,
+        registers = false,
+        spelling = false
+    }
+})
+require('which-key').add({
+    -- {'<leader>c', group = 'Clear'},
+    {'<leader>f', group = 'Find'},
+    {'<leader>k', group = 'Sidebar'},
+    -- {'<leader>l', group = 'LSP'},
+    {'<leader>m', group = 'Miscellaneous'},
+    {'<leader>r', group = 'Remote Session'},
+    -- {'<leader>g', group = 'Goto'},
+    {'<leader>G', group = 'Git/Hub'},
+    {'<leader>T', group = 'Tasks'}
+})

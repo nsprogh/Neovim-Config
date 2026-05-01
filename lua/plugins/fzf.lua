@@ -1,71 +1,66 @@
-local function files()
-    require('fzf-lua').files({
-        find_opts = [[-path '*/.*' -prune -o -type f -print]],
-        rg_opts   = [[--color=never --files]],
-        fd_opts   = [[--color=never --type f --type l --exclude .git]],
-        hidden = false,
-        previewer = false
-    })
-end
+vim.pack.add({'https://github.com/ibhagwan/fzf-lua'})
 
--- TODO figure out how to quiet this command when not a git repository
-local function project_files()
-    local handle = require('fzf-lua').git_files()
-    if not handle then
-        files()
-    end
-end
+require('fzf-lua').setup({})
 
-local function recent_files()
-    require('fzf-lua').oldfiles()
-end
+vim.keymap.set('n', '<C-x><C-f>',
+    function()
+        require('fzf-lua').files({
+            find_opts = [[-path '*/.*' -prune -o -type f -print]],
+            rg_opts   = [[--color=never --files]],
+            fd_opts   = [[--color=never --type f --type l --exclude .git]],
+            hidden = false,
+            previewer = false
+        })
+    end,
+    {desc = 'Find files'})
 
-local function project_grep()
-    require('fzf-lua').live_grep()
-end
+vim.keymap.set('n', '<C-x><C-r>',
+    function() require('fzf-lua').oldfiles() end,
+    {desc = 'find recent files'})
 
-local function man_pages()
-    local selected_sections
-    if vim.v.count > 0 then
-        selected_sections = {tostring(vim.v.count)}
-    else
-        selected_sections = {'ALL'}
-    end
+vim.keymap.set('n', '<C-/>',
+    function() require('fzf-lua').live_grep() end,
+    {desc = 'project search'})
 
-    require('fzf-lua').man_pages({
-        sections = selected_sections,
-        previewer = false
-    })
-end
+vim.keymap.set('n', '<leader>fm',
+    function()
+        local selected_sections
+        if vim.v.count > 0 then
+            selected_sections = {tostring(vim.v.count)}
+        else
+            selected_sections = {'ALL'}
+        end
 
-return {
-    'ibhagwan/fzf-lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    keys = {
-        {'<leader>ff', files,
-            desc = '[f]iles'},
-        {'<leader>fF', files,
-            desc = '[F]iles (force scan)'},
-        {'<leader>fr', recent_files,
-            desc = '[r]ecent files'},
-        {'<leader>fg', project_grep,
-            desc = '[g]rep pattern'},
-        {'<leader>fm', man_pages,
-            desc = '[m]an page'},
-        {'<leader>fd', function() require('fzf-lua').diagnostics_document() end,
-            desc = '[d]iagnostics'},
-        {'<leader>fD', function() require('fzf-lua').diagnostics_workspace() end,
-            desc = '[D]iagnostics (workspace)'},
-        {'<leader>fh', function() require('fzf-lua').helptags() end,
-            desc = '[h]elp page'},
-        {'<leader>fb', function() require('fzf-lua').buffers() end,
-            desc = '[b]uffers'},
-        {'<leader>fr', function() require('fzf-lua').lsp_references() end,
-            desc = '[r]eferences (LSP)'},
-        {'<leader>fs', function() require('fzf-lua').lsp_document_symbols() end,
-            desc = 'document [s]ymbols (LSP)'}
-    },
-    ---@module "fzf-lua"
-    ---@type fzf-lua.Config|{}
-    opts = {}
-}
+        require('fzf-lua').man_pages({
+            sections = selected_sections,
+            previewer = false
+        })
+    end,
+    {desc = '[m]an page'})
+
+vim.keymap.set('n', '<C-m>',
+    function() require('fzf-lua').diagnostics_document() end,
+    {desc = 'diagnostics'})
+
+vim.keymap.set('n', '<A-m>',
+    function() require('fzf-lua').diagnostics_workspace() end,
+    {desc = 'diagnostics (workspace)'})
+
+vim.keymap.set('n', '<leader>fh',
+    function() require('fzf-lua').helptags() end,
+    {desc = '[h]elp page'})
+
+vim.keymap.set('n', '<C-x><C-b>',
+    function() require('fzf-lua').buffers() end,
+    {desc = 'buffer switcher'})
+
+-- Overload default
+vim.keymap.set('n', 'grr',
+    function() require('fzf-lua').lsp_references() end,
+    {desc = 'references (lsp)'})
+
+vim.keymap.set('n', 'gs',
+    function() require('fzf-lua').lsp_document_symbols() end,
+    {desc = 'document symbols (lsp)'})
+
+-- TODO lsp workspace symbols?

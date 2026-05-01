@@ -1,8 +1,7 @@
--- Treesitter
+vim.pack.add({
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' }
+})
 
----Table of filetype => parsers assocations. If no key is specified then the
----ft and parser are assumed to be the same. Parsers can be a single value or
----a table of values that are merged into the final set of parsers.
 local filetypes = {
     'bash',
     'c',
@@ -42,63 +41,47 @@ for ft, parser in pairs(filetypes) do
     end
 end
 
-return {
-    'nvim-treesitter/nvim-treesitter', branch = 'master',
-    name = 'treesitter',
-    build = ':TSUpdate',
-    dependencies = {
-        {
-            -- Treesitter equivalent to context.vim
-            'nvim-treesitter/nvim-treesitter-context', branch = 'master',
-            opts = {
-                enable = true,
-                max_lines = 5
-            }
-        },
-    },
-    cmd = {'TSIntall', 'TSInstallInfo', 'TSUpdate'},
-    ft = fts,
-    opts = {
-        ensure_installed = parsers,
-        highlight = {
-            enable = true,
-            -- add languages not supported by treesitter here
-            additional_vim_regex_highlighting = false
-        },
-        indent = {enable = true},
-        autopairs = {enable = false},
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                node_incremental = 'v',
-                node_decremental = 'V'
-            }
-        }
-    },
-    config = function (_, opts)
-        require('nvim-treesitter.configs').setup(opts)
+require('nvim-treesitter').install(parsers)
 
-        require('nvim-treesitter.install').prefer_git = false
-
-        local groupid = vim.api.nvim_create_augroup('treesitter', { clear = true })
-
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = {'typescript', 'json'},
-            group = groupid,
-            callback = function (args)
-                local window = vim.api.nvim_get_current_win()
-
-                vim.wo[window][0].foldmethod = 'expr'
-                vim.wo[window][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            end
-        })
-
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = 'json',
-            group = groupid,
-            callback = function (args)
-                vim.wo.foldlevel = 1
-            end
-        })
+local groupid = vim.api.nvim_create_augroup('plugins.treesitter', { clear = true })
+vim.api.nvim_create_autocmd('PackChanged', {
+    desc = 'Update treesitter parsers on update',
+    group = groupid,
+    callback = function (event)
+        local name, kind = event.data.spec.name, event.data.spec.kind
+        if name == 'nvim-treesitter' and kind == 'update' then
+            vim.cmd.TSUpdate()
+        end
     end
-}
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    desc = 'Enable treesitter highlighting',
+    group = groupid,
+    pattern = fts,
+    callback = function ()
+        -- Highlighting
+        vim.treesitter.start()
+        -- Experimental indentation
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = {'typescript', 'json'},
+    group = groupid,
+    callback = function (args)
+        local window = vim.api.nvim_get_current_win()
+
+        vim.wo[window][0].foldmethod = 'expr'
+        vim.wo[window][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'json',
+    group = groupid,
+    callback = function (args)
+        vim.wo.foldlevel = 1
+    end
+})
