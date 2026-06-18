@@ -52,6 +52,11 @@
       "src": "https://github.com/tpope/vim-fugitive",
       "version": "'v3.7'"
     },
+    "vim-ledger": {
+      "rev": "46b4b1158a6304285cab8917a4cd89f641ad8f0f",
+      "src": "https://github.com/ledger/vim-ledger",
+      "version": "1.0.0 - 2.0.0"
+    },
     "vim-rhubarb": {
       "rev": "5496d7c94581c4c9ad7430357449bb57fc59f501",
       "src": "https://github.com/tpope/vim-rhubarb",

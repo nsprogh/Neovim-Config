@@ -24,6 +24,7 @@ vim.o.undofile = true
 -- vim.o.termguicolors = true
 --vim.o.cmdheight = 0
 vim.o.showmode = false
+vim.o.spelllang = 'en_us'
 
 -- Folds
 vim.o.foldenable = true
